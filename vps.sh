@@ -7,10 +7,10 @@ apt install -y git python3 python3-venv python3-pip tmux
 # Clone the repo 
 if [ -z $UPSTREAM_REPO ]; then
     echo "Cloning main Repository"
-    git clone https://github.com/TheBlackLion17/AADVAN_VPS /AADVAN_VPS
+    git clone https://github.com/TheBlackLion17/AGSV2 /AGSV2
 else
     echo "Cloning Custom Repo from $UPSTREAM_REPO"
-    git clone $UPSTREAM_REPO /AADVAN_VPS
+    git clone $UPSTREAM_REPO /AGSV2
 fi
 
 # Create and activate virtual environment
