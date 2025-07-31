@@ -3,9 +3,8 @@ from pyrogram import Client, filters, enums
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from info import CHANNEL, START_UP_PIC
 from Script import script
-from database.users_chats_db import userdb  # Import the correct object
 from pyrogram.types import CallbackQuery
-from database.users_chats_db import agsbots
+from database.users_chats_db import *
 
 @Client.on_message(filters.private & filters.command("start"))
 async def start(client, message):
