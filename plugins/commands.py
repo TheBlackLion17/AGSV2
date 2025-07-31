@@ -12,7 +12,7 @@ from datetime import datetime
 from pyrogram import Client, filters, enums
 from pyrogram.errors import FloodWait
 from pyrogram.types import *
-
+from bot import bot
 from database.users_chats_db import db, delete_all_msg
 from info import *
 from utils import *
@@ -49,3 +49,7 @@ async def cb_handler(client, query):
         await query.message.edit_text("ℹ️ About: I'm a filter bot built with Pyrogram!")
     elif query.data == "close":
         await query.message.delete()
+
+
+
+bot = Bot()
