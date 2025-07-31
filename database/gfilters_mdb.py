@@ -1,44 +1,113 @@
-# database/gfilters_mdb.py
+import pymongo
+from info import DATABASE_URI, DATABASE_NAME
+from pyrogram import enums
+import logging
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.ERROR)
 
-from motor.motor_asyncio import AsyncIOMotorClient
-from info import MONGO_URL
-
-client = AsyncIOMotorClient(MONGO_URL)
-db = client.auto_filter_db  # Use consistent DB name
-
-global_filters = db.global_filters
-
-
-# Save or update a global filter
-async def save_gfilter(keyword: str, file_data: dict):
-    await global_filters.update_one(
-        {"keyword": keyword},
-        {"$set": {"file_data": file_data}},
-        upsert=True
-    )
+myclient = pymongo.MongoClient(DATABASE_URI)
+mydb = myclient[DATABASE_NAME]
 
 
-# Get a global filter by keyword
-async def get_gfilter(keyword: str) -> dict:
-    gfilter = await global_filters.find_one({"keyword": keyword})
-    return gfilter.get("file_data") if gfilter else None
+
+async def add_gfilter(gfilters, text, reply_text, btn, file, alert):
+    mycol = mydb[str(gfilters)]
+    # mycol.create_index([('text', 'text')])
+
+    data = {
+        'text':str(text),
+        'reply':str(reply_text),
+        'btn':str(btn),
+        'file':str(file),
+        'alert':str(alert)
+    }
+
+    try:
+        mycol.update_one({'text': str(text)},  {"$set": data}, upsert=True)
+    except:
+        logger.exception('Some error occured!', exc_info=True)
+             
+     
+async def find_gfilter(gfilters, name):
+    mycol = mydb[str(gfilters)]
+    
+    query = mycol.find( {"text":name})
+    # query = mycol.find( { "$text": {"$search": name}})
+    try:
+        for file in query:
+            reply_text = file['reply']
+            btn = file['btn']
+            fileid = file['file']
+            try:
+                alert = file['alert']
+            except:
+                alert = None
+        return reply_text, btn, alert, fileid
+    except:
+        return None, None, None, None
 
 
-# Get all global filter keywords
-async def get_all_gfilters() -> list:
-    cursor = global_filters.find({})
-    return [doc["keyword"] async for doc in cursor]
+async def get_gfilters(gfilters):
+    mycol = mydb[str(gfilters)]
+
+    texts = []
+    query = mycol.find()
+    try:
+        for file in query:
+            text = file['text']
+            texts.append(text)
+    except:
+        pass
+    return texts
 
 
-# Delete a global filter by keyword
-async def delete_gfilter(keyword: str):
-    await global_filters.delete_one({"keyword": keyword})
+async def delete_gfilter(message, text, gfilters):
+    mycol = mydb[str(gfilters)]
+    
+    myquery = {'text':text }
+    query = mycol.count_documents(myquery)
+    if query == 1:
+        mycol.delete_one(myquery)
+        await message.reply_text(
+            f"'`{text}`'  deleted. I'll not respond to that gfilter anymore.",
+            quote=True,
+            parse_mode=enums.ParseMode.MARKDOWN
+        )
+    else:
+        await message.reply_text("Couldn't find that gfilter!", quote=True)
+
+async def del_allg(message, gfilters):
+    if str(gfilters) not in mydb.list_collection_names():
+        await message.edit_text("Nothing to Remove !")
+        return
+
+    mycol = mydb[str(gfilters)]
+    try:
+        mycol.drop()
+        await message.edit_text(f"All gfilters has been removed !")
+    except:
+        await message.edit_text("Couldn't remove all gfilters !")
+        return
+
+async def count_gfilters(gfilters):
+    mycol = mydb[str(gfilters)]
+
+    count = mycol.count()
+    return False if count == 0 else count
 
 
-# Delete all global filters
-async def delete_all_gfilters():
-    await global_filters.delete_many({})
+async def gfilter_stats():
+    collections = mydb.list_collection_names()
 
+    if "CONNECTION" in collections:
+        collections.remove("CONNECTION")
 
-# ✅ Export db object for use elsewhere if needed
-gfilters_db = db
+    totalcount = 0
+    for collection in collections:
+        mycol = mydb[collection]
+        count = mycol.count()
+        totalcount += count
+
+    totalcollections = len(collections)
+
+    return totalcollections, totalcount
