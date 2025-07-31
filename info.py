@@ -4,6 +4,8 @@ import time
 from os import environ
 from Script import *
 
+def is_enabled(value: str, default: bool = True) -> bool:
+    return str(value).lower() in ("true", "1", "yes", "on") if value is not None else default
 
 
 API_ID = int(os.environ.get("API_ID", "13357171"))  # Replace with your actual API ID
