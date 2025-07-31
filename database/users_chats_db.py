@@ -17,10 +17,14 @@ class UsersChatsDB:
     async def is_user_exist(self, user_id: int) -> bool:
         return await self.user_col.find_one({"user_id": user_id}) is not None
 
-    async def add_user(self, user_id: int):
-        if not await self.is_user_exist(user_id):
-            await self.user_col.insert_one({"user_id": user_id})
-
+    async def add_user(self, user_id, name):
+        # Your logic here, example:
+        await self.collection.update_one(
+            {"user_id": user_id},
+            {"$set": {"user_id": user_id, "name": name}},
+            upsert=True
+        )
+        
     async def total_users_count(self) -> int:
         return await self.user_col.count_documents({})
 
@@ -46,6 +50,10 @@ class UsersChatsDB:
 
     async def delete_chat(self, chat_id: int):
         await self.chat_col.delete_one({"chat_id": chat_id})
+
+# In users_chats_db.py
+        
+
 
 
 # Export as userdb
