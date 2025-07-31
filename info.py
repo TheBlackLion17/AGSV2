@@ -17,6 +17,8 @@ AUTH_CHANNEL = int(os.environ.get("AUTH_CHANNEL", "-1001234567890"))  # Optional
 # Thumbnail or Start Image
 START_UP_PIC = os.environ.get("PICS", "https://telegra.ph/file/abcd12345.jpg").split()  # List of images
 
+# Database
+MONGO_URL = environ.get('MONGO_URL', "mongodb+srv://v2:v2@cluster0.9dbt2hc.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 # Other URLs or Settings
 UPDATE_CHANNEL_URL = os.environ.get("UPDATE_CHANNEL_URL", "https://t.me/YourUpdates")
 SUPPORT_GROUP_URL = os.environ.get("SUPPORT_GROUP_URL", "https://t.me/YourSupport")
