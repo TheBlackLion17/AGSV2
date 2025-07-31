@@ -15,7 +15,7 @@ LOG_CHANNEL = int(os.environ.get("LOG_CHANNEL", "-1002801544620"))  # Log channe
 AUTH_CHANNEL = int(os.environ.get("AUTH_CHANNEL", "-1001614481524"))  # Optional: force join
 
 # Thumbnail or Start Image
-START_UP_PIC = os.environ.get("PICS", "https://files.catbox.moe/g00ax7.jpg").split()  # List of images
+START_UP_PIC = (environ.get('START_UP_PICS' ,'https://telegra.ph/file/7813a2970277d0ae265a1.jpg')).split() # List of images
 
 # Other URLs or Settings
 UPDATE_CHANNEL_URL = os.environ.get("UPDATE_CHANNEL_URL", "https://t.me/AgsModsOG")
