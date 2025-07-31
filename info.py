@@ -1,5 +1,7 @@
 import os
+import time
 from os import environ
+
 
 
 API_ID = int(os.environ.get("API_ID", "13357171"))  # Replace with your actual API ID
