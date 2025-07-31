@@ -8,20 +8,71 @@ from Script import script
 
 @Client.on_message(filters.command("start") & filters.incoming)
 async def start(client, message):
+    user_mention = message.from_user.mention if message.from_user else message.chat.title
+
+    # Group / Supergroup handling
     if message.chat.type in [enums.ChatType.GROUP, enums.ChatType.SUPERGROUP]:
         buttons = [
-            [InlineKeyboardButton("📢 Updates", url=CHANNEL),
-             InlineKeyboardButton("❓ Help", callback_data="help_data")],
-            [InlineKeyboardButton("🔎 Search", switch_inline_query_current_chat="")],
-            [InlineKeyboardButton("👨‍💻 Developer", url="https://t.me/YourUsername")]
+            [InlineKeyboardButton('⛩️ ᴜᴘᴅᴀᴛᴇꜱ ᴄʜᴀɴɴᴇʟ ⛩️', url=f'https://t.me/{SUPPORT_CHAT}')],
+            [InlineKeyboardButton('💁‍♂️ sᴇᴇ ᴍᴇ 💁‍♂️', url=f"https://t.me/{temp.U_NAME}?start=help")]
         ]
-        reply_markup = InlineKeyboardMarkup(buttons)
+        await message.reply(
+            START_MESSAGE.format(user=user_mention, bot=client.mention),
+            reply_markup=InlineKeyboardMarkup(buttons),
+            disable_web_page_preview=True
+        )
+        await asyncio.sleep(2)
+
+        # Add group to database if not exists
+        if not await db.get_chat(message.chat.id):
+            total_members = await client.get_chat_members_count(message.chat.id)
+            await client.send_message(
+                LOG_CHANNEL,
+                script.LOG_TEXT_G.format(
+                    a=message.chat.title,
+                    b=message.chat.id,
+                    c=message.chat.username,
+                    d=total_members,
+                    f=client.mention,
+                    e="Unknown"
+                )
+            )
+            await db.add_chat(message.chat.id, message.chat.title, message.chat.username)
+        return
+
+    # Private chat logic
+    if not await db.is_user_exist(message.from_user.id):
+        await db.add_user(message.from_user.id, message.from_user.first_name)
+        await client.send_message(
+            LOG_CHANNEL,
+            script.LOG_TEXT_P.format(
+                message.from_user.id,
+                user_mention,
+                message.from_user.username,
+                temp.U_NAME
+            )
+        )
+
+    # If /start is just plain or invalid args
+    if len(message.command) != 2:
+        buttons = [
+            [InlineKeyboardButton("⇋ ᴀᴅᴅ ᴍᴇ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ ⇋", url=f"http://t.me/{temp.U_NAME}?startgroup=true")],
+            [
+                InlineKeyboardButton("📢 𝗢𝘁𝘁 𝗨𝗽𝗱𝗮𝘁𝗲𝘃 📢", url="https://t.me/+RDsxY-lQ55wwOWI1"),
+                InlineKeyboardButton("🚧 𝗕𝗼𝘁 𝗨𝗽𝗱𝗮𝘁𝗲 🚧", url="https://t.me/AgsModsOG")
+            ],
+            [InlineKeyboardButton("⚡𝗠𝗼𝘃𝗲 𝗖𝗵𝗮𝗻𝗻𝗲𝗹⚡", url="https://t.me/Movies_Hub_OG")]
+        ]
+
+        m = await message.reply_sticker("CAACAgUAAxkBAAJZtmZSPxpeDEIwobQtSQnkeGbwNjsyAAJjDgACjPuwVS9WyYuOlsqENQQ")
+        await asyncio.sleep(2)
         await message.reply_photo(
-            photo=random.choice(START_UP_PIC),
-            caption=script.START_TXT.format(message.from_user.mention, temp.U_NAME, temp.B_NAME),
-            reply_markup=reply_markup,
+            photo=random.choice(PICS),
+            caption=START_MESSAGE.format(user=user_mention, bot=client.mention),
+            reply_markup=InlineKeyboardMarkup(buttons),
             parse_mode=enums.ParseMode.HTML
         )
+        return await m.delete()
 
 
 
