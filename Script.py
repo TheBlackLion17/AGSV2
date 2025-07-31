@@ -1,79 +1,32 @@
 class script:
-    START_TXT = """👋 Hello [{}](tg://user?id={})!
-    
-I am an advanced AutoFilter Bot with:
 
-• Auto/manual filters  
-• File renaming & indexing  
-• IMDB/TMDB search  
-• Admin commands  
-• MongoDB support  
-• User & group controls  
-• Force subscription  
+    START_TXT = """👋 Hello {}!
 
-Use the buttons below to explore all features."""
+I am an advanced AutoFilter + File Rename + Search bot for Telegram.
 
-    HELP_TXT = """
-🔹 **Help Menu**
+➕ Add me to your group to start using filters!
+💡 Use the buttons below to navigate help & settings."""
 
-➤ `Filter Commands:`
-• /filter [name] - Add new filter
-• /filters - List filters
-• /del [name] - Delete filter
-• /delall - Delete all
+    HELP_TXT = """🛠 **Help Menu**
 
-➤ `Admin Commands:`
-• /stats - DB stats
-• /logs - Error logs
-• /restart - Restart bot
-• /update - Pull updates
-• /ban_user [ID] - Ban user
-• /unban_user [ID] - Unban user
+Here’s how you can use me:
 
-➤ `User Commands:`
-• /id - Get ID
-• /info - File/Chat info
-• /settings - Manage settings
-• /leave - Make bot leave group
+🔍 **Search** – Just type a movie or file name to get results.
+📂 **Rename** – Send me any file and choose a new name.
+📌 **Filters** – Add filters using commands in your group.
 
-➤ `Indexing:`
-• /delete [ID] - Delete file
-• /deleteall - Wipe DB
+👮 Only admins can manage filters in groups.
 
-⚙️ Need more help? Join @YourSupportGroup
-"""
+Use the buttons below to go back or ask support."""
 
-    ABOUT_TXT = """
-🤖 **Bot Name:** AutoFilter V5  
-🧑‍💻 **Developer:** @YourUsername  
-📚 **Library:** [Pyrogram](https://docs.pyrogram.org/)  
-🗃 **Database:** MongoDB  
-🖥 **Hosted On:** VPS  
-🔐 **License:** MIT  
-"""
+    ABOUT_TXT = """🤖 **About This Bot**
 
-    BANNED_USER_TEXT = "🚫 You are banned from using this bot. Contact the admin."
-    
-    FORCE_SUB_TEXT = """🚫 To use this bot, you must join our updates channel!
+- **Bot Name**: Advanced Filter & Renamer Bot
+- **Language**: Python 3
+- **Library**: Pyrogram
+- **Database**: MongoDB
+- **Developer**: [Your Username](https://t.me/YourUsername)
 
-Click the button below and join the channel. Then press `✅ Joined`."""
-    
-    WELCOME_TEXT = "👋 Welcome to the group, {}!"
-    
-    FILTER_ADDED = "✅ Filter '{}' added successfully!"
-    FILTER_DELETED = "🗑 Filter '{}' deleted!"
-    NO_FILTERS = "⚠️ No filters found."
-    FILTERS_CLEARED = "🧹 All filters have been cleared."
-
-    FILE_RENAMED = "✅ File renamed successfully!"
-    FILE_INDEXED = "📁 File has been added to database."
-
-    ADMIN_ONLY = "❌ This command is only for admins."
-
-    ERROR_TEXT = "⚠️ Something went wrong. Try again later or check logs."
-
-    UPLOADING_MSG = "📤 Uploading your file..."
-    DOWNLOADING_MSG = "📥 Downloading media..."
-    COMPRESSING_MSG = "🗜 Compressing..."
-    PROGRESS_MSG = "⏳ Processing..."
+📢 Stay updated via our channel!
+💬 Contact support if you need help."""
 
