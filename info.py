@@ -51,9 +51,9 @@ CHANNEL = os.environ.get("CHANNEL", "https://t.me/AgsModsOG")
 MOVIE_UPDATE_CHANNEL = int(environ.get('MOVIE_UPDATE_CHANNEL', '-1002109756713'))
 # Database 
 
-DATABASE_URI = environ.get('DATABASE_URI', "mongodb+srv://v2:v2@cluster0.9dbt2hc.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+DATABASE_URL = environ.get('DATABASE_URL', "mongodb+srv://v2:v2@cluster0.9dbt2hc.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 DATABASE_NAME = os.environ.get("DATABASE_NAME","cluster0")
-DATABASE_URI2 = environ.get('DATABASE_URI', "mongodb+srv://v2:v2@cluster0.9dbt2hc.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+DATABASE_URL2 = environ.get('DATABASE_URL2', "mongodb+srv://v2:v2@cluster0.9dbt2hc.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 FILE_DB_URL = environ.get("FILE_DB_URL", DATABASE_URL)
 FILE_DB_NAME = environ.get("FILE_DB_NAME", DATABASE_NAME)
 COLLECTION_NAME = environ.get('COLLECTION_NAME', 'Telegram_files')
