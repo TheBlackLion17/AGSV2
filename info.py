@@ -14,6 +14,8 @@ ADMINS = [int(x) for x in os.environ.get("ADMINS", "7705748477").split()]
 LOG_CHANNEL = int(os.environ.get("LOG_CHANNEL", "-1002801544620"))  # Log channel ID
 AUTH_CHANNEL = int(os.environ.get("AUTH_CHANNEL", "-1001614481524"))  # Optional: force join
 
+BOT_UPTIME  = time.time()
+
 # Thumbnail or Start Image
 START_UP_PIC = (environ.get('START_UP_PICS' ,'https://telegra.ph/file/7813a2970277d0ae265a1.jpg')).split() # List of images
 
@@ -26,6 +28,11 @@ CHANNEL = os.environ.get("CHANNEL", "https://t.me/AgsModsOG")
 # Database 
 
 MONGO_URL = environ.get('MONGO_URL', "mongodb+srv://v2:v2@cluster0.9dbt2hc.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+
+
+# wes response configuration     
+    WEBHOOK = bool(os.environ.get("WEBHOOK", True))
+
 
 # Optional Limits
 FREE_USER_MAX_FILE_SIZE = int(os.environ.get("FREE_USER_MAX_FILE_SIZE", 2048))  # In MB
