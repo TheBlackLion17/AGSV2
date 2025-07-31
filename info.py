@@ -27,6 +27,16 @@ PLUGINS = os.environ.get("PLUGINS", "plugins")  # Your plugins/modules folder na
 ADMINS = [int(x) for x in os.environ.get("ADMINS", "7705748477").split()]
 LOG_CHANNEL = int(os.environ.get("LOG_CHANNEL", "-1002801544620"))  # Log channel ID
 AUTH_CHANNEL = int(os.environ.get("AUTH_CHANNEL", "-1001614481524"))  # Optional: force join
+CACHE_TIME = int(environ.get('CACHE_TIME', 300))
+ADMINS = [int(admin) if id_pattern.search(admin) else admin for admin in environ.get('ADMINS', '7705748477').split()]
+CHANNELS = [int(ch) if id_pattern.search(ch) else ch for ch in environ.get('CHANNELS', '-1002801544620').split()]
+auth_users = [int(user) if id_pattern.search(user) else user for user in environ.get('AUTH_USERS', '').split()]
+AUTH_USERS = (auth_users + ADMINS) if auth_users else []
+auth_channel = environ.get('AUTH_CHANNEL')
+auth_grp = environ.get('AUTH_GROUP')
+AUTH_CHANNEL = int(auth_channel) if auth_channel and id_pattern.search(auth_channel) else None
+AUTH_GROUPS = [int(ch) for ch in auth_grp.split()] if auth_grp else None
+
 
 BOT_UPTIME  = time.time()
 BATCH_FILE_CAPTION = environ.get("BATCH_FILE_CAPTION", None)
@@ -59,6 +69,18 @@ FILE_DB_NAME = environ.get("FILE_DB_NAME", DATABASE_NAME)
 COLLECTION_NAME = environ.get('COLLECTION_NAME', 'Telegram_files')
 
 
+WELCOM_PIC = environ.get("WELCOM_PIC", "https://graph.org/file/01ddfcb1e8203879a63d7.jpg")
+WELCOM_TEXT = environ.get("WELCOM_TEXT", script.WELCOM_TEXT)
+PMFILTER = is_enabled(environ.get('PMFILTER', "True"), True)
+G_FILTER = is_enabled(environ.get("G_FILTER", "True"), True)
+BUTTON_LOCK = is_enabled(environ.get("BUTTON_LOCK", "True"), True)
+RemoveBG_API = environ.get("RemoveBG_API", "")
+
+# url shortner
+SHORT_URL = environ.get("SHORT_URL")
+SHORT_API = environ.get("SHORT_API")
+
+
 
 CAPTION_LANGUAGES = ["Bhojpuri", "Hindi", "Bengali", "Tamil", "English", "Bangla", "Telugu", "Malayalam", "Kannada", "Marathi", "Punjabi", "Bengoli", "Gujrati", "Korean", "Gujarati", "Spanish", "French", "German", "Chinese", "Arabic", "Portuguese", "Russian", "Japanese", "Odia", "Assamese", "Urdu"]
 
@@ -79,6 +101,7 @@ MAX_RIST_BTNS = is_enabled((environ.get('MAX_RIST_BTNS', "True")), True)
 
 # Log Channel & Developer Contact
 OWNERID = int(os.environ.get("OWNER_ID", "7705748477"))
+P_TTI_SHOW_OFF = is_enabled(environ.get('P_TTI_SHOW_OFF', "True"), True)
 IMDB_DELET_TIME = int(environ.get('IMDB_DELET_TIME', "300"))
 IMDB = is_enabled(environ.get('IMDB', "False"), True)
 IMDB_TEMPLATE = environ.get("IMDB_TEMPLATE", script.IMDB_TEMPLATE)
