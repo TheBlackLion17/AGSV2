@@ -75,7 +75,7 @@ PMFILTER = is_enabled(environ.get('PMFILTER', "True"), True)
 G_FILTER = is_enabled(environ.get("G_FILTER", "True"), True)
 BUTTON_LOCK = is_enabled(environ.get("BUTTON_LOCK", "True"), True)
 RemoveBG_API = environ.get("RemoveBG_API", "")
-
+BUTTON_LOCK_TEXT = environ.get("BUTTON_LOCK_TEXT", script.BUTTON_LOCK_TEXT)
 # url shortner
 SHORT_URL = environ.get("SHORT_URL")
 SHORT_API = environ.get("SHORT_API")
@@ -101,6 +101,7 @@ MAX_RIST_BTNS = is_enabled((environ.get('MAX_RIST_BTNS', "True")), True)
 
 # Log Channel & Developer Contact
 OWNERID = int(os.environ.get("OWNER_ID", "7705748477"))
+SINGLE_BUTTON = is_enabled(environ.get('SINGLE_BUTTON', "True"), True)
 P_TTI_SHOW_OFF = is_enabled(environ.get('P_TTI_SHOW_OFF', "True"), True)
 IMDB_DELET_TIME = int(environ.get('IMDB_DELET_TIME', "300"))
 IMDB = is_enabled(environ.get('IMDB', "False"), True)
