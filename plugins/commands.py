@@ -1,4 +1,4 @@
-mport random
+import random
 from pyrogram import Client, filters, enums
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from info import CHANNEL, START_UP_PIC
