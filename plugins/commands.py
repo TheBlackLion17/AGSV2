@@ -5,53 +5,31 @@ from info import CHANNEL, START_UP_PIC
 from Script import script
 from database.users_chats_db import userdb  # Import the correct object
 
-@Client.on_message(filters.command("start") & filters.incoming)
+@Client.on_message(filters.private & filters.command("start"))
 async def start(client, message):
-    if message.chat.type in [enums.ChatType.GROUP, enums.ChatType.SUPERGROUP]:
-        buttons = [
-            [
-                InlineKeyboardButton("📢 Updates", url=CHANNEL),
-                InlineKeyboardButton("❓ Help", callback_data="help_data")
-            ],
-            [
-                InlineKeyboardButton("🔎 Search", switch_inline_query_current_chat=""),
-                InlineKeyboardButton("👨‍💻 Developer", url="https://t.me/YourUsername")
-            ]
-        ]
-        reply_markup = InlineKeyboardMarkup(buttons)
-        await message.reply_photo(
-            photo=random.choice(START_UP_PIC),
-            caption=script.START_TXT.format(
-                message.from_user.mention,
-                client.me.first_name,
-                client.me.username
-            ),
-            reply_markup=reply_markup,
-            parse_mode=enums.ParseMode.HTML
-        )
+    user = message.from_user
+    await jishubotz.add_user(client, message)                
+    button = InlineKeyboardMarkup([
+        [InlineKeyboardButton('• ᴀʙᴏᴜᴛ •', callback_data='about'),
+        InlineKeyboardButton('• ʜᴇʟᴘ •', callback_data='help')],
+        [InlineKeyboardButton("♻ ᴅᴇᴠᴇʟᴏᴘᴇʀ ♻", url='https://telegram.me/AgsModsOG')]
+    ])
+    if START_PIC:
+        await message.reply_photo(START_PIC, caption=START_TXT.format(user.mention), reply_markup=button)       
     else:
-        # Add user to DB if not exists
-        if not await userdb.is_user_exist(message.from_user.id):
-            await userdb.add_user(message.from_user.id, message.from_user.first_name)
+        await message.reply_text(text=START_TXT.format(user.mention), reply_markup=button, disable_web_page_preview=True)
+   
 
-        buttons = [
-            [
-                InlineKeyboardButton("📢 Updates", url=CHANNEL),
-                InlineKeyboardButton("❓ Help", callback_data="help_data")
-            ],
-            [
-                InlineKeyboardButton("🔎 Search", switch_inline_query_current_chat=""),
-                InlineKeyboardButton("👨‍💻 Developer", url="https://t.me/YourUsername")
-            ]
-        ]
-        reply_markup = InlineKeyboardMarkup(buttons)
-        await message.reply_photo(
-            photo=random.choice(START_UP_PIC),
-            caption=script.START_TXT.format(
-                message.from_user.mention,
-                client.me.first_name,
-                client.me.username
-            ),
-            reply_markup=reply_markup,
-            parse_mode=enums.ParseMode.HTML
+@Client.on_callback_query()
+async def cb_handler(client, query: CallbackQuery):
+    data = query.data 
+    if data == "start":
+        await query.message.edit_text(
+            text=START_TXT.format(query.from_user.mention),
+            disable_web_page_preview=True,
+            reply_markup = InlineKeyboardMarkup([
+                [InlineKeyboardButton('• ᴀʙᴏᴜᴛ •', callback_data='about'),
+                InlineKeyboardButton('• ʜᴇʟᴘ •', callback_data='help')],
+                [InlineKeyboardButton("♻ ᴅᴇᴠᴇʟᴏᴘᴇʀ ♻", url='https://telegram.me/AgsModsOG')]
+            ])
         )
