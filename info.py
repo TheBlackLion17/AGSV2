@@ -30,7 +30,7 @@ CHANNEL = os.environ.get("CHANNEL", "https://t.me/AgsModsOG")
 # Database 
 
 MONGO_URL = environ.get('MONGO_URL', "mongodb+srv://v2:v2@cluster0.9dbt2hc.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
-
+DB_NAME = os.environ.get("DB_NAME","cluster0")
 
 # wes response configuration     
 WEBHOOK = bool(os.environ.get("WEBHOOK", True))
