@@ -22,7 +22,7 @@ SESSION = environ.get('SESSION', 'Media_search')
 
 BOT_USERNAME = os.environ.get("BOT_USERNAME", "agsfilterv2_bot")
 PLUGINS = os.environ.get("PLUGINS", "plugins")  # Your plugins/modules folder name
-
+UPTIME = time.time()
 # Admins and Channels
 ADMINS = [int(x) for x in os.environ.get("ADMINS", "7705748477").split()]
 LOG_CHANNEL = int(os.environ.get("LOG_CHANNEL", "-1002801544620"))  # Log channel ID
