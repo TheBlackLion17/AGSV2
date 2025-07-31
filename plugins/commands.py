@@ -31,7 +31,7 @@ async def start(client, message):
         )
     else:
         # Add user to DB if not exists
-        if not await userdb.is_user(message.from_user.id):
+        if not await userdb.is_user_exist(message.from_user.id):
             await userdb.add_user(message.from_user.id, message.from_user.first_name)
 
         buttons = [
