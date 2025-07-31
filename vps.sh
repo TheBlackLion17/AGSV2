@@ -7,14 +7,14 @@ apt install -y git python3 python3-venv python3-pip tmux
 # Clone the repo 
 if [ -z $UPSTREAM_REPO ]; then
     echo "Cloning main Repository"
-    git clone https://github.com/TheBlackLion17/AGSV2 /AGSV2
+    git clone https://github.com/TheBlackLion17/AADVAN_VPS /AADVAN_VPS
 else
     echo "Cloning Custom Repo from $UPSTREAM_REPO"
-    git clone $UPSTREAM_REPO /AGSV2
+    git clone $UPSTREAM_REPO /AADVAN_VPS
 fi
 
 # Create and activate virtual environment
-cd /AGSV2
+cd /ProfessorBot
 python3 -m venv venv
 source venv/bin/activate
 
@@ -24,5 +24,5 @@ pip install -U -r requirements.txt --force-reinstall
 
 # Start bot in a tmux session
 echo "Starting Bot in tmux session 'bot'....✨"
-tmux new-session -d -s agsv2 'source venv/bin/activate && python3 bot.py'
+tmux new-session -d -s professorbot 'source venv/bin/activate && python3 bot.py'
 echo "Bot is running inside tmux. Use: tmux attach -t bot"
