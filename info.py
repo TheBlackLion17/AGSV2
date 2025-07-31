@@ -31,8 +31,7 @@ MONGO_URL = environ.get('MONGO_URL', "mongodb+srv://v2:v2@cluster0.9dbt2hc.mongo
 
 
 # wes response configuration     
-    WEBHOOK = bool(os.environ.get("WEBHOOK", True))
-
+WEBHOOK = bool(os.environ.get("WEBHOOK", True))
 
 # Optional Limits
 FREE_USER_MAX_FILE_SIZE = int(os.environ.get("FREE_USER_MAX_FILE_SIZE", 2048))  # In MB
