@@ -1,13 +1,13 @@
 import os
 from datetime import datetime
 from pytz import timezone
-from pyrogram import Client, __version__
+from pyrogram import __version__
 from pyrogram.raw.all import layer
 from info import *
 from aiohttp import web
 from route import web_server
 import pyrogram.utils
-import pyromod
+from pyromod import Client
 
 pyrogram.utils.MIN_CHAT_ID = -999999999999
 pyrogram.utils.MIN_CHANNEL_ID = -1009999999999
