@@ -3,18 +3,23 @@ from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
 from info import START_UP_PIC, SUPPORT_GROUP, CHANNEL
 from Script import script
 
-@Client.on_message(filters.command("start") & filters.private)
-async def start_cmd(client, message: Message):
-    await message.reply_photo(
-        photo=START_UP_PIC,
-        caption=script.START_TXT.format(message.from_user.mention),
-        reply_markup=InlineKeyboardMarkup([
+@Client.on_message(filters.command("start") & filters.incoming)
+async def start(client, message):
+    if message.chat.type in [enums.ChatType.GROUP, enums.ChatType.SUPERGROUP]:
+         buttons = [[
             [InlineKeyboardButton("📢 Updates", url=CHANNEL),
              InlineKeyboardButton("❓ Help", callback_data="help_data")],
             [InlineKeyboardButton("🔎 Search", switch_inline_query_current_chat="")],
             [InlineKeyboardButton("👨‍💻 Developer", url="https://t.me/YourUsername")]
-        ])
-    )
+         ]]
+        reply_markup = InlineKeyboardMarkup(buttons)
+        await message.reply_photo(
+            photo=random.choice(START_UP_PIC),
+            caption=script.START_TXT.format(message.from_user.mention, temp.U_NAME, temp.B_NAME),
+            reply_markup=reply_markup,
+            parse_mode=enums.ParseMode.HTML
+        )
+
 
 
 @Client.on_message(filters.command("help") & filters.private)
