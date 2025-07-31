@@ -4,6 +4,7 @@ aiofiles
 motor
 pytz
 pymongo
+pyromod
 pillow
 humanize
 hachoir
