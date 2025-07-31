@@ -1,5 +1,5 @@
 import motor.motor_asyncio
-from info import MONGO_URL
+from info import *
 
 # Create MongoDB client
 client = motor.motor_asyncio.AsyncIOMotorClient(MONGO_URL)
