@@ -6,12 +6,12 @@ from Script import script
 @Client.on_message(filters.command("start") & filters.incoming)
 async def start(client, message):
     if message.chat.type in [enums.ChatType.GROUP, enums.ChatType.SUPERGROUP]:
-         buttons = [[
+        buttons = [
             [InlineKeyboardButton("📢 Updates", url=CHANNEL),
              InlineKeyboardButton("❓ Help", callback_data="help_data")],
             [InlineKeyboardButton("🔎 Search", switch_inline_query_current_chat="")],
             [InlineKeyboardButton("👨‍💻 Developer", url="https://t.me/YourUsername")]
-         ]]
+        ]
         reply_markup = InlineKeyboardMarkup(buttons)
         await message.reply_photo(
             photo=random.choice(START_UP_PIC),
