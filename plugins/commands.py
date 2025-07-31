@@ -1,15 +1,16 @@
-import random
+mport random
 from pyrogram import Client, filters, enums
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from info import CHANNEL, START_UP_PIC
 from Script import script
 from database.users_chats_db import userdb  # Import the correct object
 from pyrogram.types import CallbackQuery
+from database.users_chats_db import agsbots
 
 @Client.on_message(filters.private & filters.command("start"))
 async def start(client, message):
     user = message.from_user
-    await jishubotz.add_user(client, message)                
+    await agsbots.add_user(client, message)                
     button = InlineKeyboardMarkup([
         [InlineKeyboardButton('• ᴀʙᴏᴜᴛ •', callback_data='about'),
         InlineKeyboardButton('• ʜᴇʟᴘ •', callback_data='help')],
