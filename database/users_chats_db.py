@@ -1,16 +1,12 @@
 import os
 from motor.motor_asyncio import AsyncIOMotorClient
-from info import MONGO_URL, DB_NAME  # Make sure DB_NAME is defined in info.py
+from info import MONGO_URL, DB_NAME
 
 class UsersChatsDB:
-    def __init__(self, uri=None, database_name=None):
-        uri = uri or MONGO_URL
-        database_name = database_name or DB_NAME
-
+    def __init__(self, uri=MONGO_URL, database_name=DB_NAME):
         self._client = AsyncIOMotorClient(uri)
         self.db = self._client[database_name]
 
-        # Collection references
         self.user_col = self.db["users"]
         self.chat_col = self.db["chats"]
         self.bannedList = self.db["bannedList"]
