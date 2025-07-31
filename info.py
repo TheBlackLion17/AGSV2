@@ -35,7 +35,7 @@ UPDATE_CHANNEL_URL = os.environ.get("UPDATE_CHANNEL_URL", "https://t.me/AgsModsO
 SUPPORT_GROUP_URL = os.environ.get("SUPPORT_GROUP_URL", "https://t.me/+A9AvnxcFRNQ5Njc1")
 SUPPORT_GROUP = os.environ.get("SUPPORT_GROUP", "https://t.me/+A9AvnxcFRNQ5Njc1")
 CHANNEL = os.environ.get("CHANNEL", "https://t.me/AgsModsOG")
-MOVIE_UPDATE_CHANNEL = int(environ.get('MOVIE_UPDATE_CHANNEL', 'https://t.me/AgsModsOG'))
+MOVIE_UPDATE_CHANNEL = int(environ.get('MOVIE_UPDATE_CHANNEL', '-1002109756713'))
 # Database 
 
 DATABASE_URI = environ.get('DATABASE_URI', "mongodb+srv://v2:v2@cluster0.9dbt2hc.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
