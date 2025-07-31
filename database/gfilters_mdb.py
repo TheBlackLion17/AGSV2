@@ -38,3 +38,7 @@ async def delete_gfilter(keyword: str):
 # Delete all global filters
 async def delete_all_gfilters():
     await global_filters.delete_many({})
+
+
+# ✅ Export db object for use elsewhere if needed
+gfilters_db = db
