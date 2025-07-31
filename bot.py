@@ -22,16 +22,18 @@ async def main():
 
     LOGGER.info(f"Bot Started as @{bot_info.username} [ID: {bot_info.id}]")
 
-    await app.send_message(
-        chat_id=LOG_CHANNEL,
-        text=f"✅ **Bot Started Successfully**\n\n👤 **Username:** @{bot_info.username}\n🆔 **User ID:** `{bot_info.id}`"
-    )
+    # Safe log to channel
+    try:
+        await app.send_message(
+            chat_id=LOG_CHANNEL,
+            text=f"✅ **Bot Started Successfully**\n\n👤 **Username:** @{bot_info.username}\n🆔 **User ID:** `{bot_info.id}`"
+        )
+    except Exception as e:
+        LOGGER.warning(f"Could not send log message to LOG_CHANNEL: {e}")
 
     await idle()
     await app.stop()
     LOGGER.info("Bot Stopped.")
 
-# ✅ DO THIS INSTEAD OF asyncio.run()
 if __name__ == "__main__":
-    import asyncio
-    app.run(main())  # ✅ this safely runs with Pyrogram’s internal event loop
+    app.run(main())
