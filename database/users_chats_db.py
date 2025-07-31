@@ -15,12 +15,18 @@ class UsersChatsDB:
     async def is_user_exist(self, user_id: int) -> bool:
         return await self.user_col.find_one({"user_id": user_id}) is not None
 
-    async def add_user(self, user_id: int, name: str):
-        await self.user_col.update_one(
-            {"user_id": user_id},
-            {"$set": {"user_id": user_id, "name": name}},
-            upsert=True
-        )
+    async def add_user(self, message):
+        user = message.from_user
+
+        user_data = {
+            "user_id": user.id,
+            "first_name": user.first_name,
+            "last_name": user.last_name,
+            "username": user.username,
+            "language_code": user.language_code,
+            "is_premium": user.is_premium,
+            "last_active": message.date
+        }
 
     async def total_users_count(self) -> int:
         return await self.user_col.count_documents({})
