@@ -1,44 +1,104 @@
-# database/filters_mdb.py
+import pymongo
+from info import DATABASE_URI, DATABASE_NAME
+from pyrogram import enums
+import logging
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.ERROR)
 
-from motor.motor_asyncio import AsyncIOMotorClient
-from info import MONGO_URL
+myclient = pymongo.MongoClient(DATABASE_URI)
+mydb = myclient[DATABASE_NAME]
 
-client = AsyncIOMotorClient(MONGO_URL)
-db = client.auto_filter_db  # change name if needed
+async def add_filter(grp_id, text, reply_text, btn, file, alert):
+    mycol = mydb[str(grp_id)]
 
-filters_collection = db.filters
+    data = {
+        'text':str(text),
+        'reply':str(reply_text),
+        'btn':str(btn),
+        'file':str(file),
+        'alert':str(alert)
+    }
+    try:
+        mycol.update_one({'text': str(text)},  {"$set": data}, upsert=True)
+    except:
+        logger.exception('Some error occured!', exc_info=True)
+               
+async def find_filter(group_id, name):
+    mycol = mydb[str(group_id)]
+    
+    query = mycol.find( {"text":name})
+    try:
+        for file in query:
+            reply_text = file['reply']
+            btn = file['btn']
+            fileid = file['file']
+            try:
+                alert = file['alert']
+            except:
+                alert = None
+        return reply_text, btn, alert, fileid
+    except:
+        return None, None, None, None
 
+async def get_filters(group_id):
+    mycol = mydb[str(group_id)]
 
-# Save a filter
-async def save_filter(chat_id: int, keyword: str, file_data: dict):
-    await filters_collection.update_one(
-        {"chat_id": chat_id, "keyword": keyword},
-        {"$set": {"file_data": file_data}},
-        upsert=True
-    )
+    texts = []
+    query = mycol.find()
+    try:
+        for file in query:
+            text = file['text']
+            texts.append(text)
+    except:
+        pass
+    return texts
 
+async def delete_filter(message, text, group_id):
+    mycol = mydb[str(group_id)]
+    
+    myquery = {'text':text }
+    query = mycol.count_documents(myquery)
+    if query == 1:
+        mycol.delete_one(myquery)
+        await message.reply_text(
+            f"'`{text}`'  deleted. I'll not respond to that filter anymore.",
+            quote=True,
+            parse_mode=enums.ParseMode.MARKDOWN
+        )
+    else:
+        await message.reply_text("Couldn't find that filter!", quote=True)
 
-# Get a filter by keyword
-async def get_filter(chat_id: int, keyword: str) -> dict:
-    filter_data = await filters_collection.find_one({"chat_id": chat_id, "keyword": keyword})
-    return filter_data.get("file_data") if filter_data else None
+async def del_all(message, group_id, title):
+    if str(group_id) not in mydb.list_collection_names():
+        await message.edit_text(f"Nothing to remove in {title}!")
+        return
 
+    mycol = mydb[str(group_id)]
+    try:
+        mycol.drop()
+        await message.edit_text(f"All filters from {title} has been removed")
+    except:
+        await message.edit_text("Couldn't remove all filters from group!")
+        return
 
-# Get all filters for a chat
-async def get_all_filters(chat_id: int) -> list:
-    cursor = filters_collection.find({"chat_id": chat_id})
-    return [doc["keyword"] async for doc in cursor]
+async def count_filters(group_id):
+    mycol = mydb[str(group_id)]
 
+    count = mycol.count()
+    return False if count == 0 else count
 
-# Delete a specific filter
-async def delete_filter(chat_id: int, keyword: str):
-    await filters_collection.delete_one({"chat_id": chat_id, "keyword": keyword})
+async def filter_stats():
+    collections = mydb.list_collection_names()
 
+    if "CONNECTION" in collections:
+        collections.remove("CONNECTION")
 
-# Delete all filters for a chat
-async def delete_many_filters(chat_id: int):
-    await filters_collection.delete_many({"chat_id": chat_id})
+    totalcount = 0
+    for collection in collections:
+        mycol = mydb[collection]
+        count = mycol.count()
+        totalcount += count
 
+    totalcollections = len(collections)
 
-# ✅ Export db object for import in __init__.py
-filters_db = db
+    return totalcollections, totalcount
