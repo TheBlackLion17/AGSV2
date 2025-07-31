@@ -1,31 +1,38 @@
-
-from aiohttp import web
-from .route import routes
-from asyncio import sleep 
-from datetime import datetime
+from pyrogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup
+from pyrogram import Client, filters
 from database.users_chats_db import db
-from info import LOG_CHANNEL
+from info import SUPPORT_GROUP
+from aiohttp import web
+from utils import temp
+
+
+routes = web.RouteTableDef()
+
+@routes.get("/", allow_head=True)
+async def root_route_handler(request):
+    return web.json_response(text="ᴀɢᴅ ᴍᴏᴅꜱ")
 
 async def web_server():
     web_app = web.Application(client_max_size=30000000)
     web_app.add_routes(routes)
     return web_app
 
-async def check_expired_premium(client):
-    while 1:
-        data = await db.get_expired(datetime.now())
-        for user in data:
-            user_id = user["id"]
-            await db.remove_premium_access(user_id)
-            try:
-                user = await client.get_users(user_id)
-                await client.send_message(
-                    chat_id=user_id,
-                    text=f"<b>ʜᴇʏ {user.mention},\n\n𝑌𝑜𝑢𝑟 𝑃𝑟𝑒𝑚𝑖𝑢𝑚 𝐴𝑐𝑐𝑒𝑠𝑠 𝐻𝑎𝑠 𝐸𝑥𝑝𝑖𝑟𝑒𝑑 𝑇ℎ𝑎𝑛𝑘 𝑌𝑜𝑢 𝐹𝑜𝑟 𝑈𝑠𝑖𝑛𝑔 𝑂𝑢𝑟 𝑆𝑒𝑟𝑣𝑖𝑐𝑒 😊. 𝐼𝑓 𝑌𝑜𝑢 𝑊𝑎𝑛𝑡 𝑇𝑜 𝑇𝑎𝑘𝑒 𝑃𝑟𝑒𝑚𝑖𝑢𝑚 𝐴𝑔𝑎𝑖𝑛, 𝑇ℎ𝑒𝑛 𝐶𝑙𝑖𝑐𝑘 𝑂𝑛 𝑇ℎ𝑒 /plan 𝐹𝑜𝑟 𝑇ℎ𝑒 𝐷𝑒𝑡𝑎𝑖𝑙𝑠 𝑂𝐹 𝑇ℎ𝑒 𝑃𝑙𝑎𝑛𝑠..</b>"
-                )
-                await client.send_message(LOG_CHANNEL, text=f"<b>#Premium_Expire\n\nUser name: {user.mention}\nUser id: <code>{user_id}</code>")
-            except Exception as e:
-                print(e)
-            await sleep(0.5)
-        await sleep(1)
+async def banned_users(_, client, message: Message):
+    return (message.from_user is not None or not message.sender_chat) and (message.from_user.id in temp.BANNED_USERS)
 
+async def disabled_chat(_, client, message: Message):
+    return message.chat.id in temp.BANNED_CHATS
+
+@Client.on_message(filters.private & filters.incoming & filters.create(banned_users))
+async def ban_reply(bot, message):
+    ban = await db.get_ban_status(message.from_user.id)
+    await message.reply(f"Sᴏʀʀʏ Dᴜᴅᴇ, Yᴏᴜ Aʀᴇ Bᴀɴɴᴇᴅ Tᴏ Usᴇ Mᴇ. \nBᴀɴ Rᴇᴀsᴏɴ: {ban['ban_reason']}")
+
+@Client.on_message(filters.group & filters.incoming & filters.create(disabled_chat))
+async def grp_bd(bot, message):
+    buttons = [[InlineKeyboardButton('Sᴜᴩᴩᴏʀᴛ', url=f'https://t.me/{SUPPORT_GROUP}')]]
+    chat = await db.get_chat(message.chat.id)
+    k = await message.reply(text=f"CHAT NOT ALLOWED 🐞\n\nMʏ Aᴅᴍɪɴs Hᴀs Rᴇsᴛʀɪᴄᴛᴇᴅ Mᴇ Fʀᴏᴍ Wᴏʀᴋɪɴɢ Hᴇʀᴇ ! Iғ Yᴏᴜ Wᴀɴᴛ Tᴏ Kɴᴏᴡ Mᴏʀᴇ Aʙᴏᴜᴛ Iᴛ Cᴏɴᴛᴀᴄᴛ Sᴜᴘᴘᴏʀᴛ..\nRᴇᴀꜱᴏɴ : <code>{chat['reason']}</code>.", reply_markup=InlineKeyboardMarkup(buttons))
+    try: await k.pin()
+    except: pass
+    await bot.leave_chat(message.chat.id)
