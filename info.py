@@ -4,8 +4,15 @@ import time
 from os import environ
 from Script import *
 
-def is_enabled(value: str, default: bool = True) -> bool:
-    return str(value).lower() in ("true", "1", "yes", "on") if value is not None else default
+id_pattern = re.compile(r'^.\d+$')
+
+def is_enabled(value, default):
+    if value.lower() in ["true", "yes", "1", "enable", "y"]:
+        return True
+    elif value.lower() in ["false", "no", "0", "disable", "n"]:
+        return False
+    else:
+        return default
 
 
 API_ID = int(os.environ.get("API_ID", "13357171"))  # Replace with your actual API ID
