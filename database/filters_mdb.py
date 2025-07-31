@@ -36,5 +36,9 @@ async def delete_filter(chat_id: int, keyword: str):
 
 
 # Delete all filters for a chat
-async def delete_all_filters(chat_id: int):
+async def delete_many_filters(chat_id: int):
     await filters_collection.delete_many({"chat_id": chat_id})
+
+
+# ✅ Export db object for import in __init__.py
+filters_db = db
