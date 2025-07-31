@@ -5,7 +5,6 @@ from info import *
 client = motor.motor_asyncio.AsyncIOMotorClient(MONGO_URL)
 db = client.AutoFilterBotDB  # Use your actual DB name here
 
-userdb = UsersChatsDB(uri=MONGO_URL, database_name=DB_NAME)
 
 
 # Collection for users
