@@ -21,6 +21,7 @@ START_UP_PIC = os.environ.get("PICS", "https://files.catbox.moe/g00ax7.jpg").spl
 UPDATE_CHANNEL_URL = os.environ.get("UPDATE_CHANNEL_URL", "https://t.me/AgsModsOG")
 SUPPORT_GROUP_URL = os.environ.get("SUPPORT_GROUP_URL", "https://t.me/+A9AvnxcFRNQ5Njc1")
 SUPPORT_GROUP = os.environ.get("SUPPORT_GROUP", "https://t.me/+A9AvnxcFRNQ5Njc1")
+CHANNEL = os.environ.get("CHANNEL", "https://t.me/AgsModsOG")
 
 # Database 
 
