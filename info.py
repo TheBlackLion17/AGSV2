@@ -29,7 +29,11 @@ LOG_CHANNEL = int(os.environ.get("LOG_CHANNEL", "-1002801544620"))  # Log channe
 AUTH_CHANNEL = int(os.environ.get("AUTH_CHANNEL", "-1001614481524"))  # Optional: force join
 
 BOT_UPTIME  = time.time()
-
+BATCH_FILE_CAPTION = environ.get("BATCH_FILE_CAPTION", None)
+CUSTOM_FILE_CAPTION = environ.get("CUSTOM_FILE_CAPTION", "{file_name}")
+PROTECT_CONTENT = is_enabled(environ.get('PROTECT_CONTENT', "False"), False)
+START_MESSAGE = environ.get('START_MESSAGE', script.START_TXT)
+FORCE_SUB_TEXT = environ.get('FORCE_SUB_TEXT', script.FORCE_SUB_TEXT)
 # ============================
 # Bot Settings Configuration
 # ============================
@@ -37,12 +41,12 @@ CACHE_TIME = int(environ.get('CACHE_TIME', 300))
 USE_CAPTION_FILTER = bool(environ.get('USE_CAPTION_FILTER', True))
 
 # Thumbnail or Start Image
-START_UP_PIC = (environ.get('START_UP_PICS' ,'https://telegra.ph/file/7813a2970277d0ae265a1.jpg')).split() # List of images
+PICS = (environ.get('PICS' ,'https://telegra.ph/file/7813a2970277d0ae265a1.jpg')).split() # List of images
 
 # Other URLs or Settings
 UPDATE_CHANNEL_URL = os.environ.get("UPDATE_CHANNEL_URL", "https://t.me/AgsModsOG")
 SUPPORT_GROUP_URL = os.environ.get("SUPPORT_GROUP_URL", "https://t.me/+A9AvnxcFRNQ5Njc1")
-SUPPORT_GROUP = os.environ.get("SUPPORT_GROUP", "https://t.me/+A9AvnxcFRNQ5Njc1")
+SUPPORT_CHAT = os.environ.get("SUPPORT_CHAT", "https://t.me/+A9AvnxcFRNQ5Njc1")
 CHANNEL = os.environ.get("CHANNEL", "https://t.me/AgsModsOG")
 MOVIE_UPDATE_CHANNEL = int(environ.get('MOVIE_UPDATE_CHANNEL', '-1002109756713'))
 # Database 
