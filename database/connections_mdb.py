@@ -4,9 +4,9 @@ from info import MONGO_URL
 from motor.motor_asyncio import AsyncIOMotorClient
 
 client = AsyncIOMotorClient(MONGO_URL)
-db = client.auto_filter_db  # You can rename this as per your bot
+conn_db = client.auto_filter_db  # ✅ this is what you're importing elsewhere
 
-connect_collection = db.connections
+connect_collection = conn_db.connections
 
 
 # Save connection
