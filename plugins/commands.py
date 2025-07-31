@@ -25,27 +25,27 @@ TIMEZONE = "Asia/Kolkata"
 BATCH_FILES = {}
 
 
-@Client.on_message(filters.command("start") & filters.incoming)
+@Client.on_message(filters.command("start") & filters.private)
 async def start(client, message):
-    if EMOJI_MODE:    
-        await message.react(emoji=random.choice(REACTIONS), big=True) 
-    if message.chat.type in [enums.ChatType.GROUP, enums.ChatType.SUPERGROUP]:
-        buttons = [[
-                    InlineKeyboardButton('• ᴀᴅᴅ ᴍᴇ ᴛᴏ ᴜʀ ᴄʜᴀᴛ •', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
-                ],[
-                    InlineKeyboardButton('• ᴍᴀsᴛᴇʀ •', url="https://t.me/cosmic_freak"),
-                    InlineKeyboardButton('• sᴜᴘᴘᴏʀᴛ •', url='https://t.me/codeflixsupport')
-                ],[
-                    InlineKeyboardButton('• ᴊᴏɪɴ ᴜᴘᴅᴀᴛᴇs ᴄʜᴀɴɴᴇʟ •', url="https://t.me/codeflix_bots")
-                  ]]
-        reply_markup = InlineKeyboardMarkup(buttons)
-        await message.reply(script.GSTART_TXT.format(message.from_user.mention if message.from_user else message.chat.title, temp.U_NAME, temp.B_NAME), reply_markup=reply_markup, disable_web_page_preview=True)
-        await asyncio.sleep(2) 
-        if not await db.get_chat(message.chat.id):
-            total=await client.get_chat_members_count(message.chat.id)
-            await client.send_message(LOG_CHANNEL, script.LOG_TEXT_G.format(message.chat.title, message.chat.id, total, "Unknown"))       
-            await db.add_chat(message.chat.id, message.chat.title)
-        return 
-    if not await db.is_user_exist(message.from_user.id):
-        await db.add_user(message.from_user.id, message.from_user.first_name)
-        await client.send_message(LOG_CHANNEL, script.LOG_TEXT_P.format(message.from_user.id, message.from_user.mention))
+    btn = [
+        [InlineKeyboardButton("📚 Help", callback_data="help"),
+         InlineKeyboardButton("ℹ️ About", callback_data="about")],
+        [InlineKeyboardButton("❌ Close", callback_data="close")]
+    ]
+
+    START_PIC = random.choice(START_PIC)
+    caption = script.START_TXT.format(mention=message.from_user.mention)
+
+    await message.reply_photo(
+        photo=START_PIC,
+        caption=caption,
+        reply_markup=InlineKeyboardMarkup(btn)
+    )
+@Client.on_callback_query()
+async def cb_handler(client, query):
+    if query.data == "help":
+        await query.message.edit_text("🆘 Help Section Coming Soon...")
+    elif query.data == "about":
+        await query.message.edit_text("ℹ️ About: I'm a filter bot built with Pyrogram!")
+    elif query.data == "close":
+        await query.message.delete()
