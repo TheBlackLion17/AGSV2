@@ -1,28 +1,11 @@
-# Base image
-FROM python:3.10-slim
+FROM python:3.10
+RUN apt update && apt upgrade -y
+RUN apt install git -y
+COPY requirements.txt /requirements.txt
 
-# Set environment variables
-ENV PYTHONUNBUFFERED=1 \
-    TZ=Asia/Kolkata
+RUN cd /
+RUN pip install -U pip && pip install -U -r requirements.txt
+WORKDIR /app
 
-# Set working directory
-WORKDIR /usr/src/app
-
-# Install system dependencies
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
-    build-essential \
-    ffmpeg \
-    libpq-dev \
-    curl \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
-
-# Copy bot files
 COPY . .
-
-# Install Python dependencies
-RUN pip install --upgrade pip && pip install -r requirements.txt
-
-# Start the bot
-CMD ["python3", "bot.py"]
+CMD ["bash", "start.sh"]
