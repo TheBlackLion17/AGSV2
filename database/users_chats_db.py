@@ -10,9 +10,11 @@ user_collection = db.users
 chat_collection = db.chats
 
 class UsersChatsDB:
-    def __init__(self):
-        self.user_col = user_collection
-        self.chat_col = chat_collection
+    def __init__(self, uri, database_name):
+        self._client = motor.motor_asyncio.AsyncIOMotorClient(uri)
+        self.agsbots = self._client[database_name]
+        self.col = self.agsbots.user
+        self.bannedList = self.agsbots.bannedList
 
     async def is_user_exist(self, user_id: int) -> bool:
         return await self.user_col.find_one({"user_id": user_id}) is not None
