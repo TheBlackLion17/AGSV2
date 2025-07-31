@@ -18,15 +18,15 @@ app = Client(
     plugins={"root": PLUGINS}
 )
 
-
 async def start_bot():
+    bot_started = False
     try:
         await app.start()
-        bot_info = await app.get_me()
+        bot_started = True  # Mark that app.start() succeeded
 
+        bot_info = await app.get_me()
         LOGGER.info(f"Bot Started as @{bot_info.username} [ID: {bot_info.id}]")
-        
-        # Log to channel
+
         await app.send_message(
             chat_id=LOG_CHANNEL,
             text=f"✅ **Bot Started Successfully**\n\n👤 **Username:** @{bot_info.username}\n🆔 **User ID:** `{bot_info.id}`"
@@ -35,11 +35,12 @@ async def start_bot():
         await idle()
 
     except Exception as e:
-        LOGGER.error(f"Error while starting bot: {e}")
-    finally:
-        await app.stop()
-        LOGGER.info("Bot Stopped.")
+        LOGGER.error(f"❌ Error while starting bot: {e}")
 
+    finally:
+        if bot_started:  # Only stop if it was started
+            await app.stop()
+            LOGGER.info("Bot Stopped.")
 
 if __name__ == "__main__":
     asyncio.run(start_bot())
