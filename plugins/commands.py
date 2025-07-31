@@ -9,7 +9,7 @@ from database.users_chats_db import *
 @Client.on_message(filters.private & filters.command("start"))
 async def start(client, message):
     user = message.from_user
-    await agsbots.add_user(client, message)                
+    await userdb.add_user(client, message)                
     button = InlineKeyboardMarkup([
         [InlineKeyboardButton('• ᴀʙᴏᴜᴛ •', callback_data='about'),
         InlineKeyboardButton('• ʜᴇʟᴘ •', callback_data='help')],
