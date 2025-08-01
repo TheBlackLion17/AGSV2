@@ -50,6 +50,22 @@ Tʜɪs Mᴏᴅᴜʟᴇ Oɴʟʏ Wᴏʀᴋs Fᴏʀ Mʏ Aᴅᴍɪɴs
 
 • /g_filter off Usᴇ Tʜɪs Cᴏᴍᴍᴏᴀɴᴅ + on/offғ Iɴ Yᴏᴜʀ Gʀᴏᴜᴘ Tᴏ Cᴏɴᴛʀᴏʟ Gʟᴏʙᴀʟ Fɪʟᴛᴇʀ Iɴ Yᴏᴜʀ Gʀᴏᴜᴘ"""
 
+     CAPTION_TXT = f"""
+<b>🎬 {title} ({year})</b> {language} {quality}.mkv
+<code>{size}</code>
+
+<b><a href='https://t.me/YourBot?start=download'>DOWNLOAD</a></b>
+
+<code>{filename}</code>
+
+━━━━━━━━━━━━━━━━━━━━
+<b>JOIN WITH US 🔻</b>
+↻ <a href='https://t.me/+A9AvnxcFRNQ5Njc1'>@OTTupdates1TG</a>
+↻ <a href='https://t.me/AgsModsOG'>@BotUpdateChannel</a>
+↻ <a href='https://t.me/Movies_Hub_OG'>tMovieChannel</a>
+━━━━━━━━━━━━━━━━━━━━
+"""
+
     MANUELFILTER_TXT = """<b>Hᴇʟᴘ Fᴏʀ Fɪʟᴛᴇʀs</b>
 
 <i>Fɪʟᴛᴇʀ Is Tʜᴇ Fᴇᴀᴛᴜʀᴇ Wᴇʀᴇ Usᴇʀs Cᴀɴ Sᴇᴛ Aᴜᴛᴏᴍᴀᴛᴇᴅ Rᴇᴘʟɪᴇs Fᴏʀ A Pᴀʀᴛɪᴄᴜʟᴀʀ Kᴇʏᴡᴏʀᴅ Aɴᴅ Bᴏᴛ  Wɪʟʟ Rᴇsᴘᴏɴᴅ Wʜᴇɴᴇᴠᴇʀ A Kᴇʏᴡᴏʀᴅ Is Fᴏᴜɴᴅ Tʜᴇ Mᴇssᴀɢᴇ</i>
