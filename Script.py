@@ -49,15 +49,14 @@ Tʜɪs Mᴏᴅᴜʟᴇ Oɴʟʏ Wᴏʀᴋs Fᴏʀ Mʏ Aᴅᴍɪɴs
 • /delallg - Tᴏ Dᴇʟᴇᴛᴇ Aʟʟ Gʟᴏʙᴀʟ Fɪʟᴛᴇʀꜱ
 
 • /g_filter off Usᴇ Tʜɪs Cᴏᴍᴍᴏᴀɴᴅ + on/offғ Iɴ Yᴏᴜʀ Gʀᴏᴜᴘ Tᴏ Cᴏɴᴛʀᴏʟ Gʟᴏʙᴀʟ Fɪʟᴛᴇʀ Iɴ Yᴏᴜʀ Gʀᴏᴜᴘ"""
+    
+    CAPTION_TXT = """
+<b>🎬 {file_name}</b>
+<code>{file_size}</code>
 
-     CAPTION_TXT = """
-<b>🎬 {title} ({year})</b> {language} {quality}.mkv
-<code>{size}</code>
+<b><a href='{download_link}'>DOWNLOAD</a></b>
 
-<b><a href='https://t.me/YourBot?start=download'>DOWNLOAD</a></b>
-
-<code>{filename}</code>
-
+<code>{description}</code>
 ━━━━━━━━━━━━━━━━━━━━
 <b>JOIN WITH US 🔻</b>
 ↻ <a href='https://t.me/+A9AvnxcFRNQ5Njc1'>@OTTupdates1TG</a>
