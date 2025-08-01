@@ -1,110 +1,108 @@
-import pymongo
-from info import DATABASE_URL, DATABASE_NAME
-from pyrogram import enums
 import logging
+from motor.motor_asyncio import AsyncIOMotorClient
+from pyrogram import enums
+from info import DATABASE_URL, DATABASE_NAME
+
 logger = logging.getLogger(__name__)
-logger.setLevel(logging.ERROR)
+logger.setLevel(logging.INFO)
 
-myclient = pymongo.MongoClient(DATABASE_URL)
-mydb = myclient["GlobalFilters"]
+client = AsyncIOMotorClient(DATABASE_URL)
+mydb = client[DATABASE_NAME]  # "GlobalFilters"
 
-
-
+# Add or update a global filter
 async def add_gfilter(gfilters, text, reply_text, btn, file, alert):
-    mycol = mydb[str(gfilters)]
-    data = {
-        'text':str(text),
-        'reply':str(reply_text),
-        'btn':str(btn),
-        'file':str(file),
-        'alert':str(alert)
-    }
     try:
-        mycol.update_one({'text': str(text)},  {"$set": data}, upsert=True)
-    except:
-        logger.exception('Some error occured!', exc_info=True)
-             
-     
+        mycol = mydb[str(gfilters)]
+        data = {
+            'text': str(text),
+            'reply': str(reply_text),
+            'btn': str(btn),
+            'file': str(file),
+            'alert': str(alert)
+        }
+        await mycol.update_one({'text': str(text)}, {"$set": data}, upsert=True)
+    except Exception as e:
+        logger.error(f"Error in add_gfilter: {e}")
+
+# Find a global filter
 async def find_gfilter(gfilters, name):
-    mycol = mydb[str(gfilters)]
-    
-    query = mycol.find( {"text":name})
-    # query = mycol.find( { "$text": {"$search": name}})
     try:
-        for file in query:
-            reply_text = file['reply']
-            btn = file['btn']
-            fileid = file['file']
-            try:
-                alert = file['alert']
-            except:
-                alert = None
-        return reply_text, btn, alert, fileid
-    except:
-        return None, None, None, None
+        mycol = mydb[str(gfilters)]
+        result = await mycol.find_one({"text": name})
+        if result:
+            return (
+                result.get('reply'),
+                result.get('btn'),
+                result.get('alert'),
+                result.get('file')
+            )
+    except Exception as e:
+        logger.error(f"Error in find_gfilter: {e}")
+    return None, None, None, None
 
-
+# Get all global filters
 async def get_gfilters(gfilters):
     mycol = mydb[str(gfilters)]
-
-    texts = []
-    query = mycol.find()
+    filters = []
     try:
-        for file in query:
-            text = file['text']
-            texts.append(text)
-    except:
-        pass
-    return texts
+        async for item in mycol.find({}, {"text": 1, "_id": 0}):
+            filters.append(item['text'])
+    except Exception as e:
+        logger.error(f"Error in get_gfilters: {e}")
+    return filters
 
-
+# Delete a specific global filter
 async def delete_gfilter(message, text, gfilters):
     mycol = mydb[str(gfilters)]
-    
-    myquery = {'text':text }
-    query = mycol.count_documents(myquery)
-    if query == 1:
-        mycol.delete_one(myquery)
-        await message.reply_text(
-            f"'`{text}`'  deleted. I'll not respond to that gfilter anymore.",
-            quote=True,
-            parse_mode=enums.ParseMode.MARKDOWN
-        )
-    else:
-        await message.reply_text("Couldn't find that gfilter!", quote=True)
-
-async def del_allg(message, gfilters):
-    if str(gfilters) not in mydb.list_collection_names():
-        await message.edit_text("Nothin!")
-        return
-
-    mycol = mydb[str(gfilters)]
     try:
-        mycol.drop()
-        await message.edit_text(f"All filters has been removed")
-    except:
+        query = {'text': text}
+        count = await mycol.count_documents(query)
+        if count:
+            await mycol.delete_one(query)
+            await message.reply_text(
+                f"`{text}` deleted. I will not respond to that global filter anymore.",
+                quote=True,
+                parse_mode=enums.ParseMode.MARKDOWN
+            )
+        else:
+            await message.reply_text("Couldn't find that global filter!", quote=True)
+    except Exception as e:
+        logger.error(f"Error in delete_gfilter: {e}")
+
+# Delete all global filters from a specific group
+async def del_allg(message, gfilters):
+    try:
+        if str(gfilters) not in await mydb.list_collection_names():
+            await message.edit_text("Nothing to remove!")
+            return
+        await mydb[str(gfilters)].drop()
+        await message.edit_text("All global filters have been removed.")
+    except Exception as e:
+        logger.error(f"Error in del_allg: {e}")
         await message.edit_text("Couldn't remove all filters!")
-        return
 
+# Count number of global filters in a group
 async def count_gfilters(gfilters):
-    mycol = mydb[str(gfilters)]
+    try:
+        count = await mydb[str(gfilters)].count_documents({})
+        return count if count else False
+    except Exception as e:
+        logger.error(f"Error in count_gfilters: {e}")
+        return False
 
-    count = mycol.count()
-    return False if count == 0 else count
-
-
+# Get stats across all global filter groups
 async def gfilter_stats():
-    collections = mydb.list_collection_names()
-
-    if "CONNECTION" in collections:
-        collections.remove("CONNECTION")
-
     totalcount = 0
-    for collection in collections:
-        mycol = mydb[collection]
-        count = mycol.count()
-        totalcount += count
+    try:
+        collections = await mydb.list_collection_names()
+        if "CONNECTION" in collections:
+            collections.remove("CONNECTION")
 
-    totalcollections = len(collections)
+        for collection in collections:
+            count = await mydb[collection].count_documents({})
+            totalcount += count
 
-    return totalcollections, totalcount
+        return len(collections), totalcount
+    except Exception as e:
+        logger.error(f"Error in gfilter_stats: {e}")
+        return 0, 0
