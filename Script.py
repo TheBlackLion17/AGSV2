@@ -1,4 +1,4 @@
-class script(object):  
+class script(object):
     START_TXT = """<blockquote>👋🏻 Hᴇʟʟᴏ {}.</blockquote>
 𝖨’𝗆 𝖺𝗇 𝖺𝗎𝗍𝗈 𝖿𝗂𝗅𝗍𝖾𝗋 𝖻𝗈𝗍 𝗍𝗁𝖺𝗍 𝖼𝖺𝗇 𝗉𝗋𝗈𝗏𝗂𝖽𝖾 𝗆𝗈𝗏𝗂𝖾𝗌 𝗂𝗇 𝗒𝗈𝗎𝗋 𝗍𝖾𝗅𝖾𝗀𝗋𝖺𝗆 𝗀𝗋𝗈𝗎𝗉𝗌.
 
@@ -8,34 +8,149 @@ class script(object):
 🎊 𝖠𝗇𝖽 𝗂’𝗅𝗅 𝗍𝖺𝗄𝖾 𝗂𝗍 𝖿𝗋𝗈𝗆 𝗍𝗁𝖾𝗋𝖾!
 
 <blockquote>©️ Maintained by <a href="https://t.me/AgsModsOG">@AgsModsOG</a></blockquote>"""
+
+    HELP_TXT = """
+🙋🏻‍♂️ Hᴇʟʟᴏ {}! 🤓
+
+<blockquote>📌 Aᴠᴀɪʟᴀʙʟᴇ Cᴏᴍᴍᴀɴᴅs:</blockquote>
+
+🔹 /start – Check if I’m alive  
+🔹 /ping – Check bot response time  
+🔹 /usage – How to use the bot  
+🔹 /status – Bot system status  
+🔹 /info – Your user info  
+🔹 /id – Get your Telegram ID  
+🔹 /stats – Database stats  
+🔹 /broadcast – Broadcast message (Owner only)
+
+<blockquote>📙 Nᴏᴛɪᴄᴇ:</blockquote>
+⚠️ Pʟᴇᴀsᴇ ᴅᴏɴ’ᴛ sᴘᴀᴍ ᴛʜᴇ ʙᴏᴛ. 🙂
+"""
+    ABOUT_TXT = """<b>
+<blockquote>🤖 Nᴀᴍᴇ: ᴋᴜᴛᴛᴜ ʙᴏᴛ™</blockquote>
+
+👨‍💻 Cʀᴇᴀᴛᴏʀ: <a href="https://t.me/AgsModsOG">AgsModsOG</a>  
+💬 Lᴀɴɢᴜᴀɢᴇ: Pʏᴛʜᴏɴ 3  
+🗄️ Dᴀᴛᴀʙᴀsᴇ: Mᴏɴɢᴏ DB  
+🌐 Sᴇʀᴠᴇʀ: KᴏYᴇʙ
+</b>"""
+    SOURCE_TXT = """<b>📢 NOTE:</b>
+<blockquote>ᴋᴜᴛᴛᴜ ʙᴏᴛ™ is an open source project.</blockquote>
+
+🔗 <b>Source Code:</b> <a href="https://t.me/AgsModsOG">Click Here 😂</a>
+
+<b>👨‍💻 DEVS:</b>  
+<blockquote><a href="https://t.me/AgsModsOG">AgsModsOG✅</a></blockquote>
+"""
+    MANUELFILTER_TXT = """<b>❓ Help: Filters</b>
+
+Filters allow users to set automated replies for specific keywords. Whenever a message contains a keyword, EvaMaria will automatically respond with the preset message.
+
+<b>🔒 NOTE:</b>
+1. The bot must have <b>admin privileges</b> in the chat.  
+2. Only <b>admins</b> can add or manage filters.  
+3. <b>Alert buttons</b> have a character limit of 64.
+
+<b>⚙️ Commands & Usage:</b>
+• <code>/filter</code> – Add a filter to the chat  
+• <code>/filters</code> – List all filters in the chat  
+• <code>/del</code> – Delete a specific filter  
+• <code>/delall</code> – Delete all filters (Chat Owner only)
+"""
+    PM_SUPPORT_TXT = """<b>Hey {user},
+
+❌ You can't search for movies in private chat.
+
+✅ Please join our Movie Channel and try searching there instead.</b>
+
+<blockquote>©️ Maintained by <a href="https://t.me/AgsModsOG">@AgsModsOG</a></blockquote>"""
+
+    BUTTON_TXT = """<b>❓ Help: Buttons</b>
+
+This bot supports both URL and alert inline buttons.
+
+<b>🔒 NOTE:</b>
+1. Telegram does not allow sending buttons without content; content is mandatory.  
+2. Buttons are supported with any Telegram media type.  
+3. Buttons must be properly formatted using Markdown syntax.
+
+<b>🌐 URL Buttons:</b>
+<code>[Button Text](buttonurl:https://t.me/sources_cods)</code>
+
+<b>⚠️ Alert Buttons:</b>
+<code>[Button Text](buttonalert:This is an alert message)</code>
+"""
+    AUTOFILTER_TXT = """<b>❓ Help: Auto Filter</b>
+
+<b>⚠️ NOTE:</b>
+1. Please make me an admin of your channel if it is private.  
+2. Ensure your channel does not contain camrips, porn, or fake files.  
+3. Forward the last message to me with quotes.  
+   I will add all the files from that channel to my database.
+"""
+    CONNECTION_TXT = """<b>❓ Help: Connections</b>
+
+- Used to connect the bot to your PM for managing filters.  
+- Helps to avoid spamming in groups.
+
+<b>⚠️ NOTE:</b>
+1. Only admins can add a connection.  
+2. Send <code>/connect</code> to connect me to your PM.
+
+<b>⚙️ Commands & Usage:</b>
+• <code>/connect</code> – Connect a particular chat to your PM.  
+• <code>/disconnect</code> – Disconnect from a chat.  
+• <code>/connections</code> – List all your connections.
+"""
+    EXTRAMOD_TXT = """<b>❓ Help: Extra Modules</b>
+
+<b>⚠️ NOTE:</b>
+These are additional features of Eva Maria.
+
+<b>⚙️ Commands & Usage:</b>
+• <code>/id</code> – Get the ID of a specified user.  
+• <code>/info</code> – Get information about a user.  
+• <code>/imdb</code> – Get film information from IMDb.  
+• <code>/search</code> – Get film information from various sources.
+"""
+    ADMIN_TXT = """<b>❓ Help: Admin Mods</b>
+
+<b>⚠️ NOTE:</b>  
+This module only works for my admins.
+
+<b>⚙️ Commands & Usage:</b>
+• <code>/logs</code> – Get recent errors.  
+• <code>/stats</code> – Get status of files in the database.  
+• <code>/delete</code> – Delete a specific file from the database.  
+• <code>/users</code> – Get list of users and their IDs.  
+• <code>/chats</code> – Get list of chats and their IDs.  
+• <code>/leave</code> – Leave a chat.  
+• <code>/disable</code> – Disable a chat.  
+• <code>/ban</code> – Ban a user.  
+• <code>/unban</code> – Unban a user.  
+• <code>/channel</code> – Get list of connected channels.  
+• <code>/broadcast</code> – Broadcast a message to all users.
+"""
+    STATUS_TXT = """📁 𝚃𝙾𝚃𝙰𝙻 𝙵𝙸𝙻𝙴𝚂: <code>{}</code>
+👥 𝚃𝙾𝚃𝙰𝙻 𝚄𝚂𝙴𝚁𝚂: <code>{}</code>
+💬 𝚃𝙾𝚃𝙰𝙻 𝙲𝙷𝙰𝚃𝚂: <code>{}</code>
+💾 𝚄𝚂𝙴𝙳 𝚂𝚃𝙾𝚁𝙰𝙶𝙴: <code>{}</code>
+📦 𝙵𝚁𝙴𝙴 𝚂𝚃𝙾𝚁𝙰𝙶𝙴: <code>{}</code>
+"""
+    LOG_TEXT_G = """#NewGroup
+👥 Group: {} (<code>{}</code>)
+👤 Total Members: <code>{}</code>
+➕ Added By: {}
+"""
+    RESULT_TXT = """<b>🎉 Yay! I dug through my database and found this for you:</b>
+<blockquote>{}</blockquote>"""
+
+    CUSTOM_FILE_CAPTION = """<b>📁 Fɪʟᴇ Nᴀᴍᴇ: 📄 <code>{file_name}</code>
+
+📦 Fɪʟᴇ Sɪᴢᴇ: 💾 <code>{file_size}</code>
+
+🔗 [💥  𝗔𝗚𝗦 𝗠𝗢𝗗𝗦 💥](https://t.me/AgsModsOG)</b>"""
     
-    HELP_TXT = "Hᴇʏ {}\nHᴇʀᴇ Mꜱ Mʏ Hᴇʟᴩ"
-
-    ABOUT_TXT = """<b>✯ Mʏ ɴᴀᴍᴇ: {}
-✯ Dᴇᴠᴇʟᴏᴩᴇʀ: <a herf=https://t.me/Gal_GadotV1_bot>ᴀɢꜱ ᴛɢ</a>
-✯ Cᴏᴅᴇᴅ Oɴ: ᴩʏᴛʜᴏɴ/ᴩʏʀᴏɢʀᴀᴍ
-✯ Mʏ DᴀᴛᴀBᴀꜱᴇ: ᴍᴏɴɢᴏ-ᴅʙ
-✯ Mʏ Sᴇʀᴠᴇʀ: ᴀɴʏᴡʜᴇʀᴇ
-✯ Mʏ Vᴇʀꜱɪᴏɴ:  ᴠ4</b>"""
-   
-    SOURCE_TXT = """<b>NOTE:</b>
-- ꜱᴏᴜʀᴄᴇ ᴄᴏᴅᴇ ʜᴇʀᴇ ◉› :<a href=https://t.me/Gal_GadotV1_bot>𝗪𝗲𝗱𝗻𝗲𝘀𝗱𝗮𝘆</a>
-
-<b>ᴅᴇᴠ: <a herf=https://t.me/Gal_GadotV1_bot>ᴀɢꜱ ᴛɢ</a></b>"""
-
-    FILE_TXT = """<b>➤ Hᴇʟᴘ Fᴏʀ Fɪʟᴇ Sᴛᴏʀᴇ</b>
-
-<i>Bʏ Usɪɴɢ Tʜɪs Mᴏᴅᴜʟᴇ Yᴏᴜ Cᴀɴ Sᴛᴏʀᴇ Fɪʟᴇs Iɴ Mʏ Dᴀᴛᴀʙᴀsᴇ Aɴᴅ I Wɪʟʟ Gɪᴠᴇ Yᴏᴜ A Pᴇʀᴍᴀɴᴇɴᴛ Lɪɴᴋ  Tᴏ Aᴄᴄᴇss Tʜᴇ Sᴀᴠᴇᴅ Fɪʟᴇs. Iғ Yᴏᴜ Wᴀɴᴛ Tᴏ Aᴅᴅ Fɪʟᴇs Fʀᴏᴍ A Pᴜʙʟɪᴄ Cʜᴀɴɴᴇʟ Sᴇɴᴅ Tʜᴇ Fɪʟᴇ Lɪɴᴋ Oɴʟʏ  Oʀ Yᴏᴜ Wᴀɴᴛ Tᴏ Aᴅᴅ Fɪʟᴇs Fʀᴏᴍ A  Pʀɪᴠᴀᴛᴇ Cʜᴀɴɴᴇʟ Yᴏᴜʀ Mᴜsᴛ Mᴀᴋᴇ Mᴇ Aᴅᴍɪɴ Oɴ Tʜᴇ Cʜᴀɴɴᴇʟ Tᴏ Aᴄᴄᴇss Fɪʟᴇs</i>
-
-<b>⪼ Cᴏᴍᴍᴀɴᴅ & Usᴀɢᴇ</b>
-➪ /link › Rᴇᴘʟʏ Tᴏ Aɴʏ Mᴇᴅɪᴀ Tᴏ Gᴇᴛ Tʜᴇ Lɪɴᴋ 
-➪ /batch › Tᴏ Cʀᴇᴀᴛᴇ Lɪɴᴋ Fᴏʀ Mᴜʟᴛɪᴘʟᴇ Mᴇᴅɪᴀ
-
-<b>⪼ EG:</b>
-</code>/batch https://t.me/mkn_bots_updates/1 https://t.me/mkn_bots_updates/10</code>"""
-  
-    FILTER_TXT = "Sᴇʟᴇᴄᴛ Wʜɪᴄʜ Oɴᴇ Yᴏᴜ Wᴀɴᴛ...✨"
-
     RESTART_GC_TXT = """
 <b>🔄 𝖡𝗈𝗍 𝖱𝖾𝗌𝗍𝖺𝗋𝗍𝖾𝖽!</b>
 AgsModsOG 
@@ -44,231 +159,53 @@ AgsModsOG
 📅 𝖣𝖺𝗍𝖾 : <code>{}</code>  
 ⏰ 𝖳𝗂𝗆𝖾 : <code>{}</code>  
 🌐 𝖳𝗂𝗆𝖾𝗓𝗈𝗇𝖾 : <code>Asia/Kolkata</code>  
-🛠️ 𝖡𝗎𝗂𝗅𝖽 𝖲𝗍𝖺𝗍𝗎𝗌 : <code>𝗏1 [ 𝖲𝗍able 😁 ]</code>
+🛠️ 𝖡𝗎𝗂𝗅𝖽 𝖲𝗍𝖺𝗍𝗎𝗌 : <code>𝗏2 [ 𝖲𝗍able 😁 ]</code>
 """
     
-    GLOBALFILTER_TXT = """<b>Hᴇʟᴘ Fᴏʀ Gʟᴏʙᴀʟ Fɪʟᴛᴇʀs</b>
-
-<i>Fɪʟᴛᴇʀ Is Tʜᴇ Fᴇᴀᴛᴜʀᴇ Wᴇʀᴇ Usᴇʀs Cᴀɴ Sᴇᴛ Aᴜᴛᴏᴍᴀᴛᴇᴅ Rᴇᴘʟɪᴇs Fᴏʀ A Pᴀʀᴛɪᴄᴜʟᴀʀ Kᴇʏᴡᴏʀᴅ Aɴᴅ Bᴏᴛ  Wɪʟʟ Rᴇsᴘᴏɴᴅ Wʜᴇɴᴇᴠᴇʀ A Kᴇʏᴡᴏʀᴅ Is Fᴏᴜɴᴅ Tʜᴇ Mᴇssᴀɢᴇ</i>
-
-<b>Nᴏᴛᴇ:</b>
-Tʜɪs Mᴏᴅᴜʟᴇ Oɴʟʏ Wᴏʀᴋs Fᴏʀ Mʏ Aᴅᴍɪɴs
-
-<b>Cᴏᴍᴍᴀɴᴅs Aɴᴅ Usᴀɢᴇ:</b>
-• /gfilter - Tᴏ Aᴅᴅ Gʟᴏʙᴀʟ Fɪʟᴛᴇʀs
-• /gfilters - Tᴏ Vɪᴇᴡ Lɪsᴛ Oғ Aʟʟ Gʟᴏʙᴀʟ Fɪʟᴛᴇʀs
-• /delg - Tᴏ Dᴇʟᴇᴛᴇ A Sᴘᴇᴄɪғɪᴄ Gʟᴏʙᴀʟ Fɪʟᴛᴇʀ
-• /delallg - Tᴏ Dᴇʟᴇᴛᴇ Aʟʟ Gʟᴏʙᴀʟ Fɪʟᴛᴇʀꜱ
-
-• /g_filter off Usᴇ Tʜɪs Cᴏᴍᴍᴏᴀɴᴅ + on/offғ Iɴ Yᴏᴜʀ Gʀᴏᴜᴘ Tᴏ Cᴏɴᴛʀᴏʟ Gʟᴏʙᴀʟ Fɪʟᴛᴇʀ Iɴ Yᴏᴜʀ Gʀᴏᴜᴘ"""
-    
-    CAPTION_TXT = """
-<b>🎬 {file_name}</b>
-<code>{file_size}</code>
-
-<b><a href='{download_link}'>DOWNLOAD</a></b>
-
-<code>{description}</code>
-━━━━━━━━━━━━━━━━━━━━
-<b>JOIN WITH US 🔻</b>
-↻ <a href='https://t.me/+A9AvnxcFRNQ5Njc1'>@OTTupdates1TG</a>
-↻ <a href='https://t.me/AgsModsOG'>@BotUpdateChannel</a>
-↻ <a href='https://t.me/Movies_Hub_OG'>tMovieChannel</a>
-━━━━━━━━━━━━━━━━━━━━
+    LOG_TEXT_P = """#NewUser
+🆔 ID: <code>{}</code>
+👤 Name: {}
 """
 
-    MANUELFILTER_TXT = """<b>Hᴇʟᴘ Fᴏʀ Fɪʟᴛᴇʀs</b>
+    SPOLL_NOT_FND = """<blockquote>Oops! 🤖</blockquote>
+No matches found for your request. 😵‍💫  
+Take a peek at the instructions below and let’s try again! 👇🏼
+"""
+#SPELL CHECK LANGUAGES TO KNOW callback
+    ENG_SPELL = """Please Note 📓
 
-<i>Fɪʟᴛᴇʀ Is Tʜᴇ Fᴇᴀᴛᴜʀᴇ Wᴇʀᴇ Usᴇʀs Cᴀɴ Sᴇᴛ Aᴜᴛᴏᴍᴀᴛᴇᴅ Rᴇᴘʟɪᴇs Fᴏʀ A Pᴀʀᴛɪᴄᴜʟᴀʀ Kᴇʏᴡᴏʀᴅ Aɴᴅ Bᴏᴛ  Wɪʟʟ Rᴇsᴘᴏɴᴅ Wʜᴇɴᴇᴠᴇʀ A Kᴇʏᴡᴏʀᴅ Is Fᴏᴜɴᴅ Tʜᴇ Mᴇssᴀɢᴇ</i>
+1️⃣ Ask using correct spelling.  
+2️⃣ Don’t ask for movies that are not released on OTT platforms.   
+"""
+    MAL_SPELL = """ദയവായി താഴെ ശ്രദ്ധിക്കുക📓
 
-<b>Nᴏᴛᴇ:</b>
-𝟷. Tʜɪs Bᴏᴛ Sʜᴏᴜʟᴅ Hᴀᴠᴇ Aᴅᴍɪɴ Pʀɪᴠɪʟʟᴀɢᴇ.
-𝟸. Oɴʟʏ Aᴅᴍɪɴs Cᴀɴ Aᴅᴅ Fɪʟᴛᴇʀs Iɴ A Cʜᴀᴛ.
-𝟹. Aʟᴇʀᴛ Bᴜᴛᴛᴏɴs Hᴀᴠᴇ A Lɪᴍɪᴛ Oғ 𝟼𝟺 Cʜᴀʀᴀᴄᴛᴇʀs.
+1️⃣ ശരിയായ അക്ഷരവിന്യാസത്തിൽ ചോദിക്കുക.  
+2️⃣ OTT പ്ലാറ്റ്‌ഫോമുകളിൽ റിലീസ് ചെയ്യാത്ത സിനിമകൾ ചോദിക്കരുത്.  
+"""
+    HIN_SPELL = """कृपया नीचे ध्यान दें📓
 
-<b>Cᴏᴍᴍᴀɴᴅs Aɴᴅ Usᴀɢᴇ:</b>
-• /filter - Aᴅᴅ A Fɪʟᴛᴇʀ Iɴ Cʜᴀᴛ
-• /filters - Lɪsᴛ Aʟʟ Tʜᴇ Fɪʟᴛᴇʀs Oғ A Cʜᴀᴛ
-• /del - Dᴇʟᴇᴛᴇ A Sᴘᴇᴄɪғɪᴄ Fɪʟᴛᴇʀ Iɴ Cʜᴀᴛ
-• /delall - Dᴇʟᴇᴛᴇ Tʜᴇ Wʜᴏʟᴇ Fɪʟᴛᴇʀs Iɴ A Cʜᴀᴛ (Cʜᴀᴛ Oᴡɴᴇʀ Oɴʟʏ)
+1️⃣ सही वर्तनी में पूछें।  
+2️⃣ उन फिल्मों के बारे में न पूछें जो ओटीटी प्लेटफॉर्म पर रिलीज़ नहीं हुई हैं।  
+"""
+    TAM_SPELL = """கீழே கவனிக்கவும்📓
 
-• /g_filter off Usᴇ Tʜɪs Cᴏᴍᴍᴏᴀɴᴅ + on/offғ Iɴ Yᴏᴜʀ Gʀᴏᴜᴘ Tᴏ Cᴏɴᴛʀᴏʟ Gʟᴏʙᴀʟ Fɪʟᴛᴇʀ Iɴ Yᴏᴜʀ Gʀᴏᴜᴘ"""
+1️⃣ சரியான எழுத்துப்பிழையில் கேளுங்கள்.  
+2️⃣ வெளியாகாத திரைப்படங்களை கேட்காதீர்கள்.   
+"""
 
-    BUTTON_TXT = """<b>Hᴇʟᴘ Fᴏʀ Bᴜᴛᴛᴏɴs</b>
+    CHK_MOV_ALRT = "♻️ ᴄʜᴇᴄᴋɪɴɢ ꜰɪʟᴇ ᴏɴ ᴍʏ ᴅᴀᴛᴀʙᴀꜱᴇ... ♻️"
 
-<i>Tʜɪs Bᴏᴛ Sᴜᴘᴘᴏʀᴛs Bᴏᴛʜ Uʀʟ Aɴᴅ Aʟᴇʀᴛ Iɴʟɪɴᴇ Bᴜᴛᴛᴏɴs.</i>
+    OLD_MES = "𝐘𝐨𝐮 𝐚𝐫𝐞 𝐮𝐬𝐢𝐧𝐠 𝐨𝐧𝐞 𝐨𝐟 𝐦𝐲 𝐨𝐥𝐝 𝐦𝐞𝐬𝐬𝐚𝐠𝐞𝐬 🤔. 𝐏𝐥𝐞𝐚𝐬𝐞 𝐬𝐞𝐧𝐝 𝐭𝐡𝐞 𝐫𝐞𝐪𝐮𝐞𝐬𝐭 𝐚𝐠𝐚𝐢𝐧."
 
-<b>Nᴏᴛᴇ:</b>
-𝟷. Tᴇʟᴇɢʀᴀᴍ Wɪʟʟ Nᴏᴛ Aʟʟᴏᴡs Yᴏᴜ Tᴏ Sᴇɴᴅ Bᴜᴛᴛᴏɴs Wɪᴛʜᴏᴜᴛ Aɴʏ Cᴏɴᴛᴇɴᴛ, Sᴏ Cᴏɴᴛᴇɴᴛ Is Mᴀɴᴅᴀᴛᴏʀʏ.
-𝟸. Tʜɪs Bᴏᴛ Sᴜᴘᴘᴏʀᴛs Bᴜᴛᴛᴏɴs Wɪᴛʜ Aɴʏ Tᴇʟᴇɢʀᴀᴍ Mᴇᴅɪᴀ Tʏᴘᴇ.
-𝟹. Bᴜᴛᴛᴏɴs Sʜᴏᴜʟᴅ Bᴇ Pʀᴏᴘᴇʀʟʏ Pᴀʀsᴇᴅ As Mᴀʀᴋᴅᴏᴡɴ Fᴏʀᴍᴀᴛ
-
-<b>Uʀʟ Bᴜᴛᴛᴏɴs:</b>
-[Bᴜᴛᴛᴏɴ Tᴇxᴛ](buttonurl:xxxxxxxxxxxx)
-
-<b>Aʟᴇʀᴛ Bᴜᴛᴛᴏɴs:</b>
-[Bᴜᴛᴛᴏɴ Tᴇxᴛ](buttonalert:Tʜɪs Is Aɴ Aʟᴇʀᴛ Mᴇssᴀɢᴇ)"""
-
-    AUTOFILTER_TXT = """<b>Hᴇʟᴘ Fᴏʀ AᴜᴛᴏFɪʟᴛᴇʀ</b>
-
-<Ai>Aᴜᴛᴏ Fɪʟᴛᴇʀ Is Tʜᴇ Fᴇᴀᴛᴜʀᴇ Tᴏ Fɪʟᴛᴇʀ & Sᴀᴠᴇ Tʜᴇ Fɪʟᴇs Aᴜᴛᴏᴍᴀᴛɪᴄᴀʟʟʏ Fʀᴏᴍ Cᴜᴀɴɴᴇʟ Tᴏ Gʀᴏᴜᴘ. Yᴏᴜ Cᴀɴ Usᴇ Tʜᴇ Fᴏʟʟᴏᴡɪɴɢ Cᴏᴍᴍᴀɴᴅ Tᴏ ᴏɴ/ᴏғғ Tʜᴇ AᴜᴛᴏFɪʟᴛᴇʀ Iɴ Yᴏᴜʀ Gʀᴏᴜᴘ</i>
-
-• /autofilter on - ᴀᴜᴛᴏғɪʟᴛᴇʀ ᴇɴᴀʙʟᴇ ɪɴ ʏᴏʀ ᴄʜᴀᴛ
-• /autofilter off - ᴀᴜᴛᴏғɪʟᴛᴇʀ ᴅɪsᴀʙʟᴇ ɪɴ ʏᴏᴜʀ ᴄʜᴀᴛ
-
-<Ob>Oᴛʜᴇʀ Cᴏᴍᴍᴀɴᴅs:</b>
-• /set_template - Sᴇᴛ Iᴍᴅʙ Tᴇᴍᴘʟᴀᴛᴇ Fᴏʀ Yᴏᴜʀ Gʀᴏᴜᴘ 
-• /get_template - Gᴇᴛ Cᴜʀʀᴇɴᴛ Iᴍᴅʙ Tᴇᴍᴘʟᴀᴛᴇ Fᴏʀ Yᴏᴜʀ Gʀᴏᴜᴘ"""
-    
-    RESULT_TXT = """<b>🎉 Yay! I dug through my database and found this for you:</b>
-<blockquote>{}</blockquote>"""
-
-
-    CONNECTION_TXT = """<b>Hᴇʟᴘ Fᴏʀ Cᴏɴɴᴇᴄᴛɪᴏɴs</b>
-
-<i> Usᴇᴅ Tᴏ Cᴏɴɴᴇᴄᴛ Bᴏᴛ Tᴏ Pᴍ Fᴏʀ Mᴀɴᴀɢɪɴɢ Fɪʟᴛᴇʀs. Iᴛ Hᴇʟᴘs Tᴏ Aᴠᴏɪᴅ Sᴘᴀᴍᴍɪɴɢ Iɴ Gʀᴏᴜᴘs</i>
-
-<b>Nᴏᴛᴇ:</b>
-• Oɴʟʏ Aᴅᴍɪɴs Cᴀɴ Aᴅᴅ A Cᴏɴɴᴇᴄᴛɪᴏɴ.
-• Sᴇɴᴅ /connect Fᴏʀ Cᴏɴɴᴇᴄᴛɪɴɢ Mᴇ Tᴏ Uʀ Pᴍ
-
-<Cb>Cᴏᴍᴍᴀɴᴅs Aɴᴅ Usᴀɢᴇ:</b>
-• /connect - Cᴏɴɴᴇᴄᴛ A Pᴀʀᴛɪᴄᴜʟᴀʀ Cʜᴀᴛ Tᴏ Yᴏᴜʀ Pᴍ
-• /disconnect - Dɪsᴄᴏɴɴᴇᴄᴛ Fʀᴏᴍ A Cʜᴀᴛ
-• /connections - Lɪsᴛ Aʟʟ Yᴏᴜʀ Cᴏɴɴᴇᴄᴛɪᴏɴs"""
-
-    ADMIN_TXT = """<b>Hᴇʟᴩ Fᴏʀ Aᴅᴍɪɴꜱ</b>
-    
-<i>Tʜɪs Mᴏᴅᴜʟᴇ Oɴʟʏ Wᴏʀᴋs Fᴏʀ Mʏ Aᴅᴍɪɴs</i>
-
-<b>Cᴏᴍᴍᴀɴᴅ & Uꜱᴀɢᴇ</b>
-• /logs - Tᴏ Gᴇᴛ Tʜᴇ Rᴇᴄᴇɴᴛ Eʀʀᴏʀꜱ
-• /delete - Tᴏ Dᴇʟᴇᴛᴇ A Sᴘᴇᴄɪꜰɪᴄ Fɪʟᴇ Fʀᴏᴍ DB
-• /deleteall - Tᴏ Dᴇʟᴇᴛᴇ Aʟʟ Fɪʟᴇs Fʀᴏᴍ DB
-• /users - Tᴏ Gᴇᴛ Lɪꜱᴛ Oꜰ Mʏ Uꜱᴇʀꜱ Aɴᴅ Iᴅꜱ
-• /chats - Tᴏ Gᴇᴛ Lɪꜱᴛ Oꜰ Mʏ Cʜᴀᴛꜱ Aɴᴅ Iᴅꜱ
-• /channel - Tᴏ Gᴇᴛ Lɪꜱᴛ Oꜰ Tᴏᴛᴀʟ Cᴏɴɴᴇᴄᴛᴇᴅ Cʜᴀɴɴᴇʟꜱ
-• /broadcast - Tᴏ Bʀᴏᴀᴅᴄᴀꜱᴛ A Mᴇꜱꜱᴀɢᴇ Tᴏ Aʟʟ Uꜱᴇʀꜱ
-• /group_broadcast - Tᴏ Bʀᴏᴀᴅᴄᴀsᴛ A Mᴇssᴀɢᴇ Tᴏ Aʟʟ Cᴏɴɴᴇᴄᴛᴇᴅ Gʀᴏᴜᴘs
-• /leave  - Wɪᴛʜ Cʜᴀᴛ Iᴅ Tᴏ Lᴇᴀᴠᴇ Fʀᴏᴍ A Cʜᴀᴛ
-• /disable  - Wɪᴛʜ Cʜᴀᴛ Iᴅ Tᴏ Dɪꜱᴀʙʟᴇ A Cʜᴀᴛ
-• /invite - Wɪᴛʜ Cʜᴀᴛ Iᴅ Tᴏ Gᴇᴛ Tʜᴇ Iɴᴠɪᴛᴇ Lɪɴᴋ Oғ Aɴʏ Cʜᴀᴛ Wʜᴇʀᴇ Tʜᴇ Bᴏᴛ Is Aᴅᴍɪɴ
-• /ban_user  - Wɪᴛʜ Iᴅ Tᴏ Bᴀɴ A Uꜱᴇʀ
-• /unban_user  - Wɪᴛʜ Iᴅ Tᴏ Uɴʙᴀɴ A Uꜱᴇʀ
-• /restart - Tᴏ Rᴇsᴛᴀʀᴛ Tʜᴇ Bᴏᴛ
-• /clear_junk - Cʟᴇᴀʀ Aʟʟ Dᴇʟᴇᴛᴇ Aᴄᴄᴏᴜɴᴛ & Bʟᴏᴄᴋᴇᴅ Aᴄᴄᴏᴜɴᴛ Iɴ Dᴀᴛᴀʙᴀsᴇ
-• /clear_junk_group - Cʟᴇᴀʀ Aᴅᴅ Rᴇᴍᴏᴠᴇᴅ Gʀᴏᴜᴘ Oʀ Dᴇᴀᴄᴛɪᴠᴀᴛᴇᴅ Gʀᴏᴜᴘs Oɴ Dʙ"""
-
-
-    STATUS_TXT = """<b>◉ ᴛᴏᴛᴀʟ ꜰɪʟᴇꜱ: <code>{}</code>
-◉ ᴛᴏᴛᴀʟ ᴜꜱᴇʀꜱ: <code>{}</code>  
-◉ ᴛᴏᴛᴀʟ ᴄʜᴀᴛꜱ: <code>{}</code>
-◉ ᴜꜱᴇᴅ ᴅʙ ꜱɪᴢᴇ: <code>{}</code>
-◉ ꜰᴇᴇᴇ ᴅʙ ꜱɪᴢᴇ: <code>{}</code></b>"""
-
-    LOG_TEXT_G = """<b>#ɴᴇᴡ_ɢʀᴏᴜᴩ
-
-◉ ɢʀᴏᴜᴩ: {a}
-◉ ɢ-ɪᴅ: <code>{b}</code>
-◉ ʟɪɴᴋ: @{c}
-◉ ᴍᴇᴍʙᴇʀꜱ: <code>{d}</code>
-◉ ᴀᴅᴅᴇᴅ ʙʏ: {e}
-
-◉ ʙʏ: @{f}</b>"""
-  
-    LOG_TEXT_P = """#ɴᴇᴡ_ᴜꜱᴇʀ
-    
-◉ ᴜꜱᴇʀ-ɪᴅ: <code>{}</code>
-◉ ᴀᴄᴄ-ɴᴀᴍᴇ: {}
-◉ ᴜꜱᴇʀɴᴀᴍᴇ: @{}
-
-◉ ʙʏ: @{}</b>"""
-  
-    GROUPMANAGER_TXT = """<b>Hᴇʟᴩ Fᴏʀ GʀᴏᴜᴩMᴀɴᴀɢᴇʀ</b>
-
-<i>Tʜɪꜱ Iꜱ Hᴇʟᴩ Oꜰ Yᴏᴜʀ Gʀᴏᴜᴩ Mᴀɴᴀɢɪɴɢ. Tʜɪꜱ Wɪʟʟ Wᴏʀᴋ Oɴʟʏ Fᴏʀ Gʀᴏᴜᴩ aᴅᴍɪɴꜱ</i>
-
-<b>Cᴏᴍᴍᴀɴᴅ & Uꜱᴀɢᴇ:</b>
-• /inkick - Cᴏᴍᴍᴀɴᴅ Wɪᴛʜ Rᴇǫᴜɪʀᴇᴅ Aʀɢᴜᴍᴇɴᴛs Aɴᴅ I Wɪʟʟ Kɪᴄᴋ Mᴇᴍʙᴇʀs Fʀᴏᴍ Gʀᴏᴜᴘ.
-• /instatus - Tᴏ Cʜᴇᴄᴋ Cᴜʀʀᴇɴᴛ Sᴛᴀᴛᴜs Oғ Cʜᴀᴛ Mᴇᴍʙᴇʀ Fʀᴏᴍ Gʀᴏᴜᴘ.
-• /dkick - Tᴏ Kɪᴄᴋ Dᴇʟᴇᴛᴇᴅ Aᴄᴄᴏᴜɴᴛs
-• /ban - To Bᴀɴ A Uꜱᴇʀ Fᴏʀᴍ Tʜᴇ Gʀᴏᴜᴩ
-• /unban - Uɴʙᴀɴ Tʜᴇ Bᴀɴɴᴇᴅ Uꜱᴇʀ
-• /tban - Tᴇᴍᴩᴏʀᴀʀʏ Bᴀɴ A Uꜱᴇʀ
-• /mute - To Mᴜᴛᴇ A Uꜱᴇʀ
-• /unmute - To Uɴᴍᴜᴛᴇ Tʜᴇ Mᴜᴛᴇᴅ Uꜱᴇʀ
-• /tmute - Wɪᴛʜ Vᴀʟᴜᴇ To Mᴜᴛᴇ Uᴩ To Pᴀʀᴛɪᴄᴜʟᴀʀ Tɪᴍᴇ Eɢ: <code>/tmute 2h</code> To Mᴜᴛᴇ 2Hᴏᴜʀ Vᴀʟᴜᴇꜱ Iꜱ (m/h/d)
-• /pin - Tᴏ Pɪɴ A Mᴇꜱꜱᴀɢᴇ Oɴ Yᴏᴜʀ Cʜᴀᴛ
-• /unpin - Tᴏ Uɴᴩɪɴ Tʜᴇ Mᴇꜱꜱᴀɢᴇ Oɴ Yᴏᴜʀ Cʜᴀᴛ
-• /purge - Dᴇʟᴇᴛᴇ Aʟʟ Mᴇssᴀɢᴇs Fʀᴏᴍ Tʜᴇ Rᴇᴘʟɪᴇᴅ Tᴏ Mᴇssᴀɢᴇ, Tᴏ Tʜᴇ Cᴜʀʀᴇɴᴛ Mᴇssᴀɢᴇ """
-
-    EXTRAMOD_TXT = """<b>Hᴇʟᴩ Fᴏʀ Exᴛʀᴀ Mᴏᴅᴜʟᴇ</b>
-
-<i>Jᴜꜱᴛ Sᴇɴᴅ Aɴʏ Iᴍᴀɢᴇ Tᴏ Eᴅɪᴛ Iᴍᴀɢᴇ ✨</i>
-
-<b>Cᴏᴍᴍᴀɴᴅꜱ & Uꜱᴀɢᴇ:</b>
-• /id - Gᴇᴛ Iᴅ Oғ A Sᴘᴇᴄɪғᴇᴅ Usᴇʀ
-• /info  - Gᴇᴛ Iɴғᴏʀᴍᴀᴛɪᴏɴ Aʙᴏᴜᴛ A Usᴇʀ
-• /imdb  - Gᴇᴛ Tʜᴇ Fɪʟᴍ Iɴғᴏʀᴍᴀᴛɪᴏɴ Fʀᴏᴍ Iᴍᴅʙ Sᴏᴜʀᴄᴇ
-• /paste [ᴛᴇxᴛ] - Pᴀsᴛᴇ Tʜᴇ Gɪᴠᴇɴ Tᴇxᴛ Oɴ Pᴀsᴛʏ
-• /tts [ᴛᴇxᴛ] - Cᴏɴᴠᴇʀᴛ Tᴇxᴛ Tᴏ Sᴘᴇᴇᴄʜ
-• /telegraph - Sᴇɴᴅ Mᴇ Tʜɪs Cᴏᴍᴍᴀɴᴅ Rᴇᴘʟʏ Wɪᴛʜ Pɪᴄᴛᴜʀᴇ Oʀ Vɪᴅᴇ Uɴᴅᴇʀ (𝟻ᴍʙ)
-• /json - Rᴇᴩʟʏ Wɪᴛʜ Aɴʏ Mᴇꜱꜱᴀɢᴇ Tᴏ Gᴇᴛ Mᴇꜱꜱᴀɢᴇ Iɴꜰᴏ (ᴜꜱᴇꜰᴜʟʟ ꜰᴏʀ ɢʀᴏᴜᴩ)
-• /written - Rᴇᴩʟʏ Wɪᴛʜ Tᴇxᴛ Tᴏ Gᴇᴛ Fɪʟᴇ (ᴜꜱᴇꜰᴜʟʟ ꜰᴏʀ ᴄᴏᴅᴇʀꜱ)
-• /carbon - Rᴇᴘʟʏ Wɪᴛʜ Tᴇxᴛ Tᴏ Gᴇᴛ Cᴀʀʙᴏɴᴀᴛᴇᴅ Iᴍᴀɢᴇ
-• /font [ᴛᴇxᴛ] - Tᴏ Cʜᴀɴɢᴇ Yᴏᴜʀ Tᴇxᴛ Fᴏɴᴛs Tᴏ Fᴀɴᴄʏ Fᴏɴᴛ
-• /share - Rᴇᴘʟʏ Wɪᴛʜ Tᴇxᴛ Tᴏ Gᴇᴛ Tᴇxᴛ Sʜᴀʀᴀʙʟᴇ Lɪɴᴋ
-• /song [ɴᴀᴍᴇ] - Tᴏ Sᴇᴀʀᴄʜ Tʜᴇ Sᴏɴɢ Iɴ YᴏᴜTᴜʙᴇ
-• /video [ʟɪɴᴋ] - Tᴏ Dᴏᴡɴʟᴏᴀᴅ Tʜᴇ YᴏᴜTᴜʙᴇ Vɪᴅᴇᴏ"""    
-    
-    CREATOR_REQUIRED = "❗<b>Yᴏᴜ Hᴀᴠᴇ To Bᴇ Tʜᴇ Gʀᴏᴜᴩ Cʀᴇᴀᴛᴏʀ Tᴏ Dᴏ Tʜᴀᴛ</b>"
-      
-    INPUT_REQUIRED = "❗ **Aʀɢᴜᴍᴇɴ Rqᴜɪʀᴇᴅ**"
-      
-    KICKED = "✔️ Sᴜᴄᴄᴇꜱꜱꜰᴜʟʟʏ Kɪᴄᴋᴇᴅ {} Mᴇᴍʙᴇʀꜱ Acᴄᴏʀᴅɪɴɢ To Tʜᴇ Aʀɢᴜᴍᴇɴᴛꜱ Prᴏᴠɪᴅᴇᴅ"
-      
-    START_KICK = "Rᴇᴍᴏᴠɪɴɢ Iɴᴀᴄᴛɪᴠᴇ Mᴇᴍʙᴇʀs Tʜɪs Mᴀʏ Tᴀᴋᴇ A Wʜɪʟᴇ"
-      
-    ADMIN_REQUIRED = "❗<b>Iᴀᴍ Nᴏᴛ Aᴅᴍɪɴ Iɴ Tʜɪꜱ Cʜᴀᴛ Sᴏ Pʟᴇᴀꜱᴇ Aᴅᴅ Mᴇ Aɢᴀɪɴ Wɪᴛʜ Aʟʟ Pᴅᴍɪɴ Pᴇʀᴍɪꜱꜱɪᴏɴ</b>"
-      
-    DKICK = "✔️ Kɪᴄᴋᴇᴅ {} Dᴇʟᴇᴛᴇᴅ Aᴄᴄᴏᴜɴᴛꜱ Sᴜᴄᴄᴇꜱꜱꜰᴜʟʟʏ"
-      
-    FETCHING_INFO = "<b>Wᴀɪᴛ I Wɪʟʟ Tᴀᴋᴇ Tʜᴇ Aʟʟ Iɴꜰᴏ</b>"
-   
-    SERVER_STATS = """Sᴇʀᴠᴇʀ Sᴛᴀᴛꜱ:
- 
-Uᴩᴛɪᴍᴇ: {}
-CPU Uꜱᴀɢᴇ: {}%
-RAM Uꜱᴀɢᴇ: {}%
-Tᴏᴛᴀʟ Dɪꜱᴋ: {}
-Uꜱᴇᴅ Dɪꜱᴋ: {} ({}%)
-Fʀᴇᴇ Dɪꜱᴋ: {}"""
-    
-    BUTTON_LOCK_TEXT = "Hᴇʏ {query}\nTʜɪꜱ Iꜱ Nᴏᴛ Fᴏʀ Yᴏᴜ. Sᴇᴀʀᴄʜ Yᴏᴜʀ Sᴇʟꜰ"
-   
-    FORCE_SUB_TEXT = "Sᴏʀʀʏ Bʀᴏ Yᴏᴜʀ Nᴏᴛ Jᴏɪɴᴇᴅ Mʏ Cʜᴀɴɴᴇʟ Sᴏ Pʟᴇᴀsᴇ Cʟɪᴄᴋ Jᴏɪɴ Bᴜᴛᴛᴏɴ Tᴏ Jᴏɪɴ Mʏ Cʜᴀɴɴᴇʟ Aɴᴅ Tʀʏ Aɢᴀɪɴ"
-   
-    WELCOM_TEXT = """Hᴇʏ {user} 💞
-
-Wᴇʟᴄᴏᴍᴇ ᴛᴏ {chat}.
-
-ꜱʜᴀʀᴇ & ꜱᴜᴩᴩᴏʀᴛ, ʀᴇqᴜᴇꜱᴛ ʏᴏᴜ ᴡᴀɴᴛᴇᴅ ᴍᴏᴠɪᴇꜱ"""
+    MOV_NT_FND = """<b>Tʜɪs Mᴏᴠɪᴇ ɪs Nᴏᴛ Yᴇᴛ Rᴇʟᴇᴀsᴇᴅ ᴏʀ Aᴅᴅᴇᴅ Tᴏ ᴅᴀᴛᴀʙᴀsᴇ.</b>
+<blockquote>Please send your msg to <a href="https://t.me/+GG9MzUEi3yIxZDY1">Click Here </a></blockquote>
+"""
 
     RESTART_TXT = """<b><u>𝖡𝗈𝗍 𝖱𝖾𝗌𝗍𝖺𝗋𝗍𝖾𝖽 ✅</u></b>"""
-  
-    IMDB_TEMPLATE = """<b>Qᴜᴇʀʏ: {query}</b>
+    DMCA_TXT = """<b><u>If You Want to craete a bot Pls condact over Admin</u></b>
 
-🏷 Tɪᴛʟᴇ: <a href={url}>{title}</a>
-🎭 Gᴇɴʀᴇꜱ: {genres}
-📆 Yᴇᴀʀ: <a href={url}/releaseinfo>{year}</a>
-🌟 Rᴀᴛɪɴɢ: <a href={url}/ratings>{rating}</a>/10"""
-   
-  
- 
+<blockquote>Please send your msg to <a href="https://t.me/+GG9MzUEi3yIxZDY1">Click Here </a></blockquote>
+"""
 
-
-   
-  
- 
 
 
