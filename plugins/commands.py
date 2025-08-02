@@ -71,31 +71,26 @@ async def start(client, message):
             return await client.send_message(chat_id=message.from_user.id, text=script.FORCE_SUB_TEXT, reply_markup=InlineKeyboardMarkup(btn), parse_mode=enums.ParseMode.DEFAULT)
         
     if len(message.command) == 2 and message.command[1] in ["subscribe", "error", "okay", "help"]:
-        buttons = [[
-            InlineKeyboardButton("⇋ ᴀᴅᴅ ᴍᴇ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ ⇋", url=f"http://t.me/{temp.U_NAME}?startgroup=true")
-            ],[
-            InlineKeyboardButton("📢 𝗢𝘁𝘁 𝗨𝗽𝗱𝗮𝘁𝗲𝘃 📢", url="https://t.me/+RDsxY-lQ55wwOWI1")
-        ],[
-            InlineKeyboardButton("🚧 𝗕𝗼𝘁 𝗨𝗽𝗱𝗮𝘁𝗲 🚧", url="https://t.me/AgsModsOG")
-            ],[      
-            InlineKeyboardButton("⚡𝗠𝗼𝘃𝗲 𝗖𝗵𝗮𝗻𝗻𝗲𝗹⚡", url="https://t.me/Movies_Hub_OG")
-        ]]
-        m = await message.reply_sticker("CAACAgUAAxkBAAJZtmZSPxpeDEIwobQtSQnkeGbwNjsyAAJjDgACjPuwVS9WyYuOlsqENQQ")
-         await message.reply_photo(
+        buttons = [
+            [InlineKeyboardButton('⤬ ᴀᴅᴅ ᴍᴇ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ ⤬', url=f'http://t.me/{temp.U_NAME}?startgroup=true')],
+            [InlineKeyboardButton('📢 ᴏᴛᴛ ᴜᴘᴅᴀᴛᴇ 📢', url="https://t.me/+RDsxY-lQ55wwOWI1")],
+            [InlineKeyboardButton('🧩 ʙᴏᴛ ᴜᴘᴅᴀᴛᴇ 🧩', url="https://t.me/AgsModsOG")],
+            [InlineKeyboardButton('🎊 ᴍᴏᴠɪᴇ ᴄʜᴀɴɴᴇʟ 🎊', url="https://t.me/+RDsxY-lQ55wwOWI1")]
+        ]
+        reply_markup = InlineKeyboardMarkup(buttons)
+        await message.reply_photo(
             photo=random.choice(PICS),
             caption=script.START_TXT.format(message.from_user.mention, temp.U_NAME, temp.B_NAME),
             reply_markup=reply_markup,
             parse_mode=enums.ParseMode.HTML
         )
         return
-        
     data = message.command[1]
     try:
         pre, file_id = data.split('_', 1)
     except:
         file_id = data
         pre = ""
-        
     if data.split("-", 1)[0] == "BATCH":
         sts = await message.reply("PLEASE WAIT......")
         file_id = data.split("-", 1)[1]
