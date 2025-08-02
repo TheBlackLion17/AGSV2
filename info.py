@@ -22,7 +22,7 @@ BOT_TOKEN = environ.get('BOT_TOKEN', '8348783837:AAETITyx94X8jlrIfTXY-iNbM1I73x2
 BOT_START_TIME = time()
 CACHE_TIME = int(environ.get('CACHE_TIME', 300))
 USE_CAPTION_FILTER = bool(environ.get('USE_CAPTION_FILTER', True))
-PICS = (environ.get('PICS', 'https://envs.sh/oP.jpg https://envs.sh/ob.jpg https://envs.sh/oi.jpg')).split()
+PICS = (environ.get('PICS', 'https://files.catbox.moe/qnnmpa.jpg https://files.catbox.moe/2ab4tp.jpg https://files.catbox.moe/3trsd2.jpg')).split()
 
 # Admins, Channels & Users
 ADMINS = [int(admin) if id_pattern.search(admin) else admin for admin in environ.get('ADMINS', '7705748477').split()]
