@@ -12,6 +12,7 @@ from database.connections_mdb import active_connection
 
 logger = logging.getLogger(__name__)
 BATCH_FILES = {}
+REACTIONS = ["🤝", "😇", "🤗", "😍", "👍", "🎅", "😐", "🥰", "🤩", "😱", "🤣", "😘", "👏", "😛", "😈", "🎉", "⚡️", "🫡", "🤓", "😎", "🏆", "🔥", "🤭", "🌚", "🆒", "👻", "😁"] #don't add any emoji because tg not support all emoji reactions
 
 @Client.on_message(filters.command("start") & filters.incoming)
 async def start(client, message):
@@ -80,9 +81,13 @@ async def start(client, message):
             InlineKeyboardButton("⚡𝗠𝗼𝘃𝗲 𝗖𝗵𝗮𝗻𝗻𝗲𝗹⚡", url="https://t.me/Movies_Hub_OG")
         ]]
         m = await message.reply_sticker("CAACAgUAAxkBAAJZtmZSPxpeDEIwobQtSQnkeGbwNjsyAAJjDgACjPuwVS9WyYuOlsqENQQ")
-        await asyncio.sleep(2)
-        await message.reply_photo(photo=random.choice(PICS), caption=START_MESSAGE.format(user=message.from_user.mention, bot=client.mention), reply_markup=InlineKeyboardMarkup(buttons), parse_mode=enums.ParseMode.HTML)
-        return await m.delete()
+         await message.reply_photo(
+            photo=random.choice(PICS),
+            caption=script.START_TXT.format(message.from_user.mention, temp.U_NAME, temp.B_NAME),
+            reply_markup=reply_markup,
+            parse_mode=enums.ParseMode.HTML
+        )
+        return
         
     data = message.command[1]
     try:
