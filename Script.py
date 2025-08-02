@@ -34,6 +34,17 @@ Then, send any movie name in your group and see the magic!</b>"""
 </code>/batch https://t.me/mkn_bots_updates/1 https://t.me/mkn_bots_updates/10</code>"""
   
     FILTER_TXT = "Sᴇʟᴇᴄᴛ Wʜɪᴄʜ Oɴᴇ Yᴏᴜ Wᴀɴᴛ...✨"
+
+    RESTART_GC_TXT = """
+<b>🔄 𝖡𝗈𝗍 𝖱𝖾𝗌𝗍𝖺𝗋𝗍𝖾𝖽!</b>
+AgsModsOG 
+<a href="https://t.me/AgsModsOG">@AgsModsOG</a>
+
+📅 𝖣𝖺𝗍𝖾 : <code>{}</code>  
+⏰ 𝖳𝗂𝗆𝖾 : <code>{}</code>  
+🌐 𝖳𝗂𝗆𝖾𝗓𝗈𝗇𝖾 : <code>Asia/Kolkata</code>  
+🛠️ 𝖡𝗎𝗂𝗅𝖽 𝖲𝗍𝖺𝗍𝗎𝗌 : <code>𝗏1 [ 𝖲𝗍able 😁 ]</code>
+"""
     
     GLOBALFILTER_TXT = """<b>Hᴇʟᴘ Fᴏʀ Gʟᴏʙᴀʟ Fɪʟᴛᴇʀs</b>
 
