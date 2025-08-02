@@ -52,7 +52,7 @@ class Bot(Client):
         if bool(WEB_SUPPORT) is True:
             app = web.AppRunner(await web_server())
             await app.setup()
-            PORT = int(os.environ.get("PORT", 8080))  # Use port 8000 or env PORT
+            PORT = int(os.environ.get("PORT", 8000))  # Use port 8000 or env PORT
             await web.TCPSite(app, "0.0.0.0", PORT).start()
         print(f"{me.first_name} Is Started.....✨️")
             
