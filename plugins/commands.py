@@ -32,20 +32,32 @@ async def start(client, message):
     if not await db.is_user_exist(message.from_user.id):
         await db.add_user(message.from_user.id, message.from_user.first_name)
         await client.send_message(LOG_CHANNEL, script.LOG_TEXT_P.format(message.from_user.id, message.from_user.mention, message.from_user.username, temp.U_NAME))
+        
     if len(message.command) != 2:
-        buttons = [[
-            InlineKeyboardButton("⇋ ᴀᴅᴅ ᴍᴇ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ ⇋ ", url=f"http://t.me/{temp.U_NAME}?startgroup=true")
-            ],[
-            InlineKeyboardButton("📢 𝗢𝘁𝘁 𝗨𝗽𝗱𝗮𝘁𝗲𝘃 📢", url="https://t.me/+RDsxY-lQ55wwOWI1")
-        ],[    
-            InlineKeyboardButton("🚧 𝗕𝗼𝘁 𝗨𝗽𝗱𝗮𝘁𝗲 🚧", url="https://t.me/AgsModsOG")
-            ],[      
-            InlineKeyboardButton("⚡𝗠𝗼𝘃𝗲 𝗖𝗵𝗮𝗻𝗻𝗲𝗹⚡", url="https://t.me/Movies_Hub_OG")
-        ]]
-        m = await message.reply_sticker("CAACAgUAAxkBAAJZtmZSPxpeDEIwobQtSQnkeGbwNjsyAAJjDgACjPuwVS9WyYuOlsqENQQ") 
-        await asyncio.sleep(2)
-        await message.reply_photo(photo=random.choice(PICS), caption=START_MESSAGE.format(user=message.from_user.mention, bot=client.mention), reply_markup=InlineKeyboardMarkup(buttons), parse_mode=enums.ParseMode.HTML)
-        return await m.delete()
+        loading_msg = await message.reply_sticker("CAACAgUAAxkBAAJZtmZSPxpeDEIwobQtSQnkeGbwNjsyAAJjDgACjPuwVS9WyYuOlsqENQQ") 
+        await asyncio.sleep(0.2)
+        await loading_msg.edit("✅ **Process Complete! Welcome to the Bot.**")
+        await asyncio.sleep(1)
+        await loading_msg.delete()
+
+        # Show main menu buttons
+        buttons = [
+            [InlineKeyboardButton('⤬ ᴀᴅᴅ ᴍᴇ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ ⤬', url=f'http://t.me/{temp.U_NAME}?startgroup=true')],
+            [InlineKeyboardButton('📢 ᴏᴛᴛ ᴜᴘᴅᴀᴛᴇ 📢', url="https://t.me/+RDsxY-lQ55wwOWI1")],
+            [InlineKeyboardButton('🧩 ʙᴏᴛ ᴜᴘᴅᴀᴛᴇ 🧩', url="https://t.me/AgsModsOG")],
+            [InlineKeyboardButton('🎊 ᴍᴏᴠɪᴇ ᴄʜᴀɴɴᴇʟ 🎊', url="https://t.me/+RDsxY-lQ55wwOWI1")]
+        ]
+        reply_markup = InlineKeyboardMarkup(buttons)
+
+        await message.reply_photo(
+            photo=random.choice(PICS),
+            caption=script.START_TXT.format(message.from_user.mention, temp.U_NAME, temp.B_NAME),
+            reply_markup=reply_markup,
+            parse_mode=enums.ParseMode.HTML
+        )
+        return
+    # Start parameter handling continues below..
+    invite_links = await is_subscribed(client, query=message)
         
     if AUTH_CHANNEL and not await is_subscribed(client, message):
         try:
