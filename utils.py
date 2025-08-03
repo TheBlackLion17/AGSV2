@@ -141,6 +141,14 @@ async def get_poster(query, bulk=False, id=False, file=None):
     }
 # https://github.com/odysseusmax/animated-lamp/blob/2ef4730eb2b5f0596ed6d03e7b05243d93e3415b/bot/utils/broadcast.py#L37
 
+async def get_status(bot_id):
+    try:
+        return await db.movie_update_status(bot_id) or False  
+    except Exception as e:
+        logging.error(f"Error in get_movie_update_status: {e}")
+        return False  
+
+
 async def broadcast_messages(user_id, message):
     try:
         await message.copy(chat_id=user_id)
