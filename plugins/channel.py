@@ -16,5 +16,6 @@ async def media(bot, message):
 
     media.file_type = file_type
     media.caption = message.caption
-    async def save_file(media)
+    async def save_file(media):
+
   
