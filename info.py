@@ -37,7 +37,7 @@ FORCE_SUB1 = environ.get('FORCE_SUB1', 'https://t.me/Movies_Hub_OG')
 FORCE_SUB2 = environ.get('FORCE_SUB2', 'https://t.me/+A9AvnxcFRNQ5Njc1')
 
 # MongoDB information
-DATABASE_URI = environ.get('DATABASE_URI', "mongodb+srv://dkd:dkd@cluster0.v7cwkqd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+DATABASE_URI = environ.get('DATABASE_URI', "mongodb+srv://ags:ags@cluster0.83hzpgy.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 DATABASE_NAME = environ.get('DATABASE_NAME', "cluster0")
 COLLECTION_NAME = environ.get('COLLECTION_NAME', 'files')
 
