@@ -45,10 +45,6 @@ async def save_file(bot, media):
   file_id, file_ref = unpack_new_file_id(media.file_id)
   file_name = re.sub(r"(_|\-|\.|\+)", " ", str(media.file_name))
   try:
-    if saveMedia == Media2: 
-        if await Media.count_documents({'file_id': file_id}, limit=1):
-            logger.warning(f'{file_name} is already saved in primary database!')
-            return False, 0
     file = saveMedia(
         file_id=file_id,
         file_ref=file_ref,
