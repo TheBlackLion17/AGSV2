@@ -30,20 +30,14 @@ class Media(Document):
     class Meta:
         indexes = ('$file_name', )
         collection_name = COLLECTION_NAME
+        
 
-
-# ✅ Helper class to wrap Pyrogram message into expected format
-class MediaWrapper:
-    def __init__(self, message):
-        media = message.document or message.video or message.audio
-        self.file_id = media.file_id
-        self.file_name = media.file_name or "Unknown"
-        self.file_size = media.file_size
-        self.file_type = media.mime_type.split("/")[0] if media.mime_type else None
-        self.mime_type = media.mime_type
-
-        caption = message.caption
-        self.caption = caption.html if hasattr(caption, "html") else caption
+async def choose_mediaDB():
+    """This Function chooses which database to use based on the value of indexDB key in the dict tempDict."""
+    global saveMedia
+    if tempDict['indexDB'] == DATABASE_URI:
+        logger.info("Using first db (Media)")
+        saveMedia = Media
 
 
 async def save_file(media):
@@ -53,15 +47,15 @@ async def save_file(media):
     file_name = re.sub(r"(_|\-|\.|\+)", " ", str(media.file_name))
 
     try:
-        file = Media(
-            file_id=file_id,
-            file_ref=file_ref,
-            file_name=file_name,
-            file_size=media.file_size,
-            file_type=media.file_type,
-            mime_type=media.mime_type,
-            caption=media.caption if media.caption else None,
-        )
+        file = saveMedia(
+        file_id=file_id,
+        file_ref=file_ref,
+        file_name=file_name,
+        file_size=media.file_size,
+        file_type=media.file_type,
+        mime_type=media.mime_type,
+        caption=media.caption.html if media.caption else None,
+    )
     except ValidationError as ve:
         logger.exception('Validation error while saving file to database')
         return False, 2
@@ -112,6 +106,41 @@ async def get_search_results(query, file_type=None, max_results=10, offset=0, fi
     files = await cursor.to_list(length=max_results)
 
     return files, next_offset, total_results
+
+
+async def get_bad_files(query, file_type=None, filter=False):
+    """For given query return (results, next_offset)"""
+    query = query.strip()
+    if not query:
+        raw_pattern = '.'
+    elif ' ' not in query:
+        raw_pattern = r'(\b|[\.\+\-_])' + query + r'(\b|[\.\+\-_])'
+    else:
+        raw_pattern = query.replace(' ', r'.*[\s\.\+\-_()]')
+    
+    try:
+        regex = re.compile(raw_pattern, flags=re.IGNORECASE)
+    except:
+        return []
+
+    if USE_CAPTION_FILTER:
+        filter = {'$or': [{'file_name': regex}, {'caption': regex}]}
+    else:
+        filter = {'file_name': regex}
+
+    if file_type:
+        filter['file_type'] = file_type
+
+    cursor = Media.find(filter)
+
+    cursor.sort('$natural', -1)
+
+    files = ((await cursor.to_list(length=(await Media.count_documents(filter)))))
+
+    total_results = len(files)
+
+    return files, total_results
+
 
 
 async def get_file_details(query):
