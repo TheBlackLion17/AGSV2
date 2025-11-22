@@ -38,7 +38,6 @@ async def give_filter(client, message):
     if k == False:
         await auto_filter(client, message)
 
-key_ = f"{message.from_user.id}_{message.message_id}"
 
 @Client.on_callback_query(filters.regex(r"^next"))
 async def next_page(bot, query):
@@ -233,6 +232,7 @@ async def filter_qualities_cb_handler(client: Client, query: CallbackQuery):
     temp.GETALL[key] = files
     settings = await get_settings(message.chat.id)
     pre = 'filep' if settings['file_secure'] else 'file'
+    key_ = f"{message.from_user.id}_{message.id}"
     if settings["button"]:
         btn = [
             [
@@ -416,6 +416,7 @@ async def filter_seasons_cb_handler(client: Client, query: CallbackQuery):
     temp.GETALL[key] = files
     settings = await get_settings(message.chat.id)
     pre = 'filep' if settings['file_secure'] else 'file'
+    key_ = f"{message.from_user.id}_{message.id}"
     if settings["button"]:
         btn = [
             [
@@ -1025,6 +1026,7 @@ async def auto_filter(client, msg, spoll=False):
         message = msg.message.reply_to_message  # msg will be callback query
         search, files, offset, total_results = spoll
     pre = 'filep' if settings['file_secure'] else 'file'
+    key_ = f"{message.from_user.id}_{message.id}"
     if settings["button"]:
         btn = [
             [
