@@ -170,7 +170,7 @@ async def qualities_cb_handler(client: Client, query: CallbackQuery):
     #     search = BUTTONS.get(key)
     #     BUTTONS[key+"1"] = search
     search = FRESH.get(key)
-    search = search.replace(' ', '_')
+    search = (search or "").replace(" ", "_")
     btn = []
     for i in range(0, len(QUALITIES)-1, 2):
         btn.append([
@@ -204,7 +204,7 @@ async def filter_qualities_cb_handler(client: Client, query: CallbackQuery):
     _, qual, key = query.data.split("#")
     curr_time = datetime.now(pytz.timezone('Asia/Kolkata')).time()
     search = FRESH.get(key)
-    search = search.replace("_", " ")
+    search = (search or "").replace(" ", "_")
     baal = qual in search
     if baal:
         search = search.replace(qual, "")
@@ -326,7 +326,7 @@ async def languages_cb_handler(client: Client, query: CallbackQuery):
     #     search = BUTTONS.get(key)
     #     BUTTONS[key+"1"] = search
     search = FRESH.get(key)
-    search = search.replace(' ', '_')
+    search = (search or "").replace(" ", "_")
     btn = []
     for i in range(0, len(LANGUAGES)-1, 2):
         btn.append([
@@ -359,7 +359,7 @@ async def filter_seasons_cb_handler(client: Client, query: CallbackQuery):
     _, seas, key = query.data.split("#")
     curr_time = datetime.now(pytz.timezone('Asia/Kolkata')).time()
     search = FRESH.get(key)
-    search = search.replace("_", " ")
+    search = (search or "").replace(" ", "_")
     sea = ""
     season_search = ["s01","s02", "s03", "s04", "s05", "s06", "s07", "s08", "s09", "s10", "season 01","season 02","season 03","season 04","season 05","season 06","season 07","season 08","season 09","season 10", "season 1","season 2","season 3","season 4","season 5","season 6","season 7","season 8","season 9"]
     for x in range (len(season_search)):
