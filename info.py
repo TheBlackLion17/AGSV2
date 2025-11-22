@@ -43,6 +43,7 @@ COLLECTION_NAME = environ.get('COLLECTION_NAME', 'files')
 
 # Others
 LOG_CHANNEL = int(environ.get('LOG_CHANNEL', '-1002801544620'))
+CHNL_LNK = environ.get('CHNL_LNK', 'https://t.me/AgsModsOG')
 SUPPORT_CHAT = environ.get('SUPPORT_CHAT', 'Movies_Hub_OG')
 P_TTI_SHOW_OFF = is_enabled((environ.get('P_TTI_SHOW_OFF', 'True')), False)
 IMDB = is_enabled((environ.get('IMDB', 'False')), True)
