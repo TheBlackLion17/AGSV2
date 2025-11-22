@@ -35,7 +35,7 @@ AUTH_CHANNEL = [int(auth_channel) for auth_channel in environ.get('AUTH_CHANNEL'
 AUTH_GROUPS = [int(ch) for ch in auth_grp.split()] if auth_grp else None
 FORCE_SUB1 = environ.get('FORCE_SUB1', 'https://t.me/Movies_Hub_OG')
 FORCE_SUB2 = environ.get('FORCE_SUB2', 'https://t.me/+A9AvnxcFRNQ5Njc1')
-
+MOVIE_UPDATE_CHANNEL = int(environ.get('MOVIE_UPDATE_CHANNEL', '-1002452484299'))  # Notification of th
 # MongoDB information
 DATABASE_URI = environ.get('DATABASE_URI', "mongodb+srv://akku:akku@cluster0.7smnpac.mongodb.net/?appName=Cluster0")
 DATABASE_NAME = environ.get('DATABASE_NAME', "cluster0")
