@@ -38,6 +38,7 @@ async def give_filter(client, message):
     if k == False:
         await auto_filter(client, message)
 
+key_ = f"{message.from_user.id}_{message.message_id}"
 
 @Client.on_callback_query(filters.regex(r"^next"))
 async def next_page(bot, query):
@@ -76,6 +77,7 @@ async def next_page(bot, query):
                 InlineKeyboardButton("⇈ Sᴇʟᴇᴄᴛ Oᴘᴛɪᴏɴ Hᴇʀᴇ ⇈", 'reqinfo')
             ]
         )
+        
         btn.insert(0, 
             [
                 InlineKeyboardButton(f'Qᴜᴀʟɪᴛʏ', callback_data=f"qualities#{key_}"),
@@ -100,6 +102,7 @@ async def next_page(bot, query):
             ]
             for file in files
         ]
+        
         btn.insert(0, 
             [
                 InlineKeyboardButton("⇈ Sᴇʟᴇᴄᴛ Oᴘᴛɪᴏɴ Hᴇʀᴇ ⇈", 'reqinfo')
