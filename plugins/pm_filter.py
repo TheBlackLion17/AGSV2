@@ -151,7 +151,7 @@ async def next_page(bot, query):
     except MessageNotModified:
         pass
     await query.answer()
-
+    
 #Qualities 
 @Client.on_callback_query(filters.regex(r"^qualities#"))
 async def qualities_cb_handler(client: Client, query: CallbackQuery):
