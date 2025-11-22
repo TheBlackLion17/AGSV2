@@ -100,7 +100,6 @@ async def next_page(bot, query):
             InlineKeyboardButton("Sᴇɴᴅ Aʟʟ", callback_data=f"sendfiles#{key}")
            
         ])
-
     else:
         btn = []
         btn.insert(0, 
