@@ -141,6 +141,21 @@ async def get_poster(query, bulk=False, id=False, file=None):
     }
 # https://github.com/odysseusmax/animated-lamp/blob/2ef4730eb2b5f0596ed6d03e7b05243d93e3415b/bot/utils/broadcast.py#L37
 
+def list_to_str(k):
+    if not k: return "N/A"
+    elif len(k) == 1: return str(k[0])
+    elif MAX_LIST_ELM:
+        k = k[:int(MAX_LIST_ELM)]
+        return ' '.join(f'{elem}, ' for elem in k)
+    else:
+        return ' '.join(f'{elem}, ' for elem in k)
+
+__repo__ = "AGS BOTS"
+__version__ = "AGS ᴠ2.5.0"
+__license__ = "BRO V3 "
+__copyright__ = "Copyright (C) 2024-present AGS <https://t.me/AgsModsOG>"
+
+
 async def get_status(bot_id):
     try:
         return await db.movie_update_status(bot_id) or False  
