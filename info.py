@@ -20,6 +20,7 @@ BOT_TOKEN = environ.get('BOT_TOKEN', '8161552461:AAEDP5LeC28D-zTLC6BiKddpEAPapaW
 
 # Bot settings
 WEB_SUPPORT = bool(environ.get("WEBHOOK", 'True'))
+UPTIME = time.time()
 BOT_START_TIME = time()
 CACHE_TIME = int(environ.get('CACHE_TIME', 1000))
 USE_CAPTION_FILTER = bool(environ.get('USE_CAPTION_FILTER', True))
