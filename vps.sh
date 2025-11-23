@@ -14,7 +14,7 @@ else
 fi
 
 # Create and activate virtual environment
-cd /ProfessorBot
+cd /AGSV2
 python3 -m venv venv
 source venv/bin/activate
 
