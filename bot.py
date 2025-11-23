@@ -61,7 +61,7 @@ class Bot(Client):
         temp.BANNED_CHATS = b_chats
 
         # Force Pyrogram time sync
-        await self.session._update_server_time()
+        # await self.session._update_server_time()
 
         await super().start()
         await Media.ensure_indexes()
