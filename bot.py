@@ -56,20 +56,24 @@ class Bot(Client):
         )
 
     async def start(self):
-        b_users, b_chats = await db.get_banned()
-        temp.BANNED_USERS = b_users
-        temp.BANNED_CHATS = b_chats
-        await super().start()
-        await Media.ensure_indexes()
-        me = await self.get_me()
-        temp.ME = me.id
-        temp.U_NAME = me.username
-        temp.B_NAME = me.first_name
-        self.username = '@' + me.username
-        logging.info(f"{me.first_name} with for Pyrogram v{__version__} (Layer {layer}) started on {me.username}.")
-        logging.info(LOG_STR)
-        await self.send_message(chat_id=LOG_CHANNEL, text=script.RESTART_TXT)#RESTART SND IN LOG_CHANNEL
-        print("Goutham SER own Bot</>")
+    b_users, b_chats = await db.get_banned()
+    temp.BANNED_USERS = b_users
+    temp.BANNED_CHATS = b_chats
+
+    # Force Pyrogram time sync
+    await self.session._update_server_time()
+
+    await super().start()
+    await Media.ensure_indexes()
+    me = await self.get_me()
+    temp.ME = me.id
+    temp.U_NAME = me.username
+    temp.B_NAME = me.first_name
+    self.username = '@' + me.username
+    logging.info(f"{me.first_name} with for Pyrogram v{__version__} (Layer {layer}) started on {me.username}.")
+    logging.info(LOG_STR)
+    await self.send_message(chat_id=LOG_CHANNEL, text=script.RESTART_TXT)#RESTART SND IN LOG_CHANNEL
+    print("Goutham SER own Bot</>")
 
         tz = pytz.timezone('Asia/Kolkata')
         today = date.today()
