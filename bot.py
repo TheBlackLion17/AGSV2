@@ -55,44 +55,44 @@ class Bot(Client):
             sleep_threshold=5,
         )
 
-   
     async def start(self):
-    b_users, b_chats = await db.get_banned()
-    temp.BANNED_USERS = b_users
-    temp.BANNED_CHATS = b_chats
+        b_users, b_chats = await db.get_banned()
+        temp.BANNED_USERS = b_users
+        temp.BANNED_CHATS = b_chats
 
-    # Force Pyrogram time sync
-    await self.session._update_server_time()
+        # Force Pyrogram time sync
+        await self.session._update_server_time()
 
-    await super().start()
-    await Media.ensure_indexes()
-    me = await self.get_me()
-    temp.ME = me.id
-    temp.U_NAME = me.username
-    temp.B_NAME = me.first_name
-    self.username = '@' + me.username
-    logging.info(f"{me.first_name} with for Pyrogram v{__version__} (Layer {layer}) started on {me.username}.")
-    logging.info(LOG_STR)
-    await self.send_message(chat_id=LOG_CHANNEL, text=script.RESTART_TXT)  # RESTART SND IN LOG_CHANNEL
-    print("Goutham SER own Bot</>")
+        await super().start()
+        await Media.ensure_indexes()
+        me = await self.get_me()
+        temp.ME = me.id
+        temp.U_NAME = me.username
+        temp.B_NAME = me.first_name
+        self.username = '@' + me.username
+        logging.info(f"{me.first_name} with for Pyrogram v{__version__} (Layer {layer}) started on {me.username}.")
+        logging.info(LOG_STR)
+        await self.send_message(chat_id=LOG_CHANNEL, text=script.RESTART_TXT)  # RESTART SND IN LOG_CHANNEL
+        print("Goutham SER own Bot</>")
 
-    tz = pytz.timezone('Asia/Kolkata')
-    today = date.today()
-    now = datetime.now(tz)
-    time = now.strftime("%H:%M:%S %p")
-    await self.send_message(chat_id=LOG_CHANNEL, text=script.RESTART_GC_TXT.format(today, time))
-    client = webserver.AppRunner(await bot_run())
-    await client.setup()
-    bind_address = "0.0.0.0"
-    await webserver.TCPSite(client, bind_address, PORT_CODE).start()
+        tz = pytz.timezone('Asia/Kolkata')
+        today = date.today()
+        now = datetime.now(tz)
+        current_time = now.strftime("%H:%M:%S %p")
+        await self.send_message(chat_id=LOG_CHANNEL, text=script.RESTART_GC_TXT.format(today, current_time))
 
-    # Schedule auto-restart every 24 hours
-    asyncio.create_task(self.schedule_restart())
+        client = webserver.AppRunner(await bot_run())
+        await client.setup()
+        bind_address = "0.0.0.0"
+        await webserver.TCPSite(client, bind_address, PORT_CODE).start()
+
+        # Schedule auto-restart every 24 hours
+        asyncio.create_task(self.schedule_restart())
+
     async def stop(self, *args):
         await super().stop()
         logging.info("Bot stopped. Bye.")
 
-    # 24 hrs restart fn()
     async def restart(self):
         logging.info("Restarting bot process...")
         await self.stop()
@@ -102,43 +102,19 @@ class Bot(Client):
         await asyncio.sleep(hours * 60 * 60)  # Wait for 24 hours
         await self.send_message(chat_id=LOG_CHANNEL, text="Auto Restarting the KuttuBot \n(24 hrs ⏰️ refresh)...")
         await self.restart()
-#restarting fn() end;
-    
+
     async def iter_messages(
         self,
         chat_id: Union[int, str],
         limit: int,
         offset: int = 0,
     ) -> Optional[AsyncGenerator["types.Message", None]]:
-        """Iterate through a chat sequentially.
-        This convenience method does the same as repeatedly calling :meth:`~pyrogram.Client.get_messages` in a loop, thus saving
-        you from the hassle of setting up boilerplate code. It is useful for getting the whole chat messages with a
-        single call.
-        Parameters:
-            chat_id (``int`` | ``str``):
-                Unique identifier (int) or username (str) of the target chat.
-                For your personal cloud (Saved Messages) you can simply use "me" or "self".
-                For a contact that exists in your Telegram address book you can use his phone number (str).
-                
-            limit (``int``):
-                Identifier of the last message to be returned.
-                
-            offset (``int``, *optional*):
-                Identifier of the first message to be returned.
-                Defaults to 0.
-        Returns:
-            ``Generator``: A generator yielding :obj:`~pyrogram.types.Message` objects.
-        Example:
-            .. code-block:: python
-                for message in app.iter_messages("pyrogram", 1, 15000):
-                    print(message.text)
-        """
         current = offset
         while True:
             new_diff = min(200, limit - current)
             if new_diff <= 0:
                 return
-            messages = await self.get_messages(chat_id, list(range(current, current+new_diff+1)))
+            messages = await self.get_messages(chat_id, list(range(current, current + new_diff + 1)))
             for message in messages:
                 yield message
                 current += 1
