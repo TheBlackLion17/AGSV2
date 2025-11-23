@@ -1,9 +1,11 @@
 import logging
 import logging.config
 from datetime import datetime, timedelta, date
-import os
 import sys
-
+import os
+os.environ["TZ"] = "UTC"
+import time
+time.tzset()
 # Get logging configurations
 logging.config.fileConfig('logging.conf')
 logging.getLogger().setLevel(logging.INFO)
