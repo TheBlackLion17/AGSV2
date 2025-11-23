@@ -1,124 +1,74 @@
-import logging
-import logging.config
-from datetime import datetime, timedelta, date
-import sys
-import os
-os.environ["TZ"] = "UTC"
-import time
-time.tzset()
-# Get logging configurations
-logging.config.fileConfig('logging.conf')
-logging.getLogger().setLevel(logging.INFO)
-logging.getLogger("pyrogram").setLevel(logging.ERROR)
-logging.getLogger("imdbpy").setLevel(logging.ERROR)
+import os, math, logging, datetime, pytz, logging.config
 
-# for prevent stoping the bot after 1 week
-logging.getLogger("asyncio").setLevel(logging.CRITICAL -1)
-import tgcrypto
-from pyrogram import Client, __version__
-from pyrogram.raw.all import layer
-from database.ia_filterdb import Media
+from aiohttp import web
+from pyrogram import Client, types
 from database.users_chats_db import db
-from info import SESSION, API_ID, API_HASH, BOT_TOKEN, LOG_STR, LOG_CHANNEL
-from utils import temp
+from database.ia_filterdb import  Media
 from typing import Union, Optional, AsyncGenerator
-from pyrogram import types
-from Script import script
-import asyncio
-import pytz
+from utils import temp, __repo__, __license__, __copyright__, __version__
+from info import API_ID, API_HASH, BOT_TOKEN, LOG_CHANNEL, UPTIME, WEB_SUPPORT, LOG_MSG
 
-# peer id invaild fixxx
-from pyrogram import utils as pyroutils
-pyroutils.MIN_CHAT_ID = -999999999999
-pyroutils.MIN_CHANNEL_ID = -100999999999999
-
-from plugins.webcode import bot_run
-from os import environ
-from aiohttp import web as webserver
-
-PORT_CODE = environ.get("PORT", "8080")
-
-
-
+# Get logging configurations
+logging.config.fileConfig("logging.conf")
+logging.getLogger(__name__).setLevel(logging.INFO)
+logging.getLogger("cinemagoer").setLevel(logging.ERROR)
 
 
 class Bot(Client):
-
     def __init__(self):
         super().__init__(
-            name="bot",
+            name="Professor-Bot",
             api_id=API_ID,
             api_hash=API_HASH,
             bot_token=BOT_TOKEN,
-            workers=50,
-            plugins={"root": "plugins"},
-            sleep_threshold=5,
+            plugins=dict(root="plugins")
         )
 
     async def start(self):
         b_users, b_chats = await db.get_banned()
         temp.BANNED_USERS = b_users
-        temp.BANNED_CHATS = b_chats
-
-        # Force Pyrogram time sync
-        # await self.session._update_server_time()
-
+        temp.BANNED_CHATS = b_chats        
+        
         await super().start()
         await Media.ensure_indexes()
         me = await self.get_me()
-        temp.ME = me.id
         temp.U_NAME = me.username
         temp.B_NAME = me.first_name
-        self.username = '@' + me.username
-        logging.info(f"{me.first_name} with for Pyrogram v{__version__} (Layer {layer}) started on {me.username}.")
-        logging.info(LOG_STR)
-        await self.send_message(chat_id=LOG_CHANNEL, text=script.RESTART_TXT)  # RESTART SND IN LOG_CHANNEL
-        print("Goutham SER own Bot</>")
-
-        tz = pytz.timezone('Asia/Kolkata')
-        today = date.today()
-        now = datetime.now(tz)
-        current_time = now.strftime("%H:%M:%S %p")
-        await self.send_message(chat_id=LOG_CHANNEL, text=script.RESTART_GC_TXT.format(today, current_time))
-
-        client = webserver.AppRunner(await bot_run())
-        await client.setup()
-        bind_address = "0.0.0.0"
-        await webserver.TCPSite(client, bind_address, PORT_CODE).start()
-
-        # Schedule auto-restart every 24 hours
-        asyncio.create_task(self.schedule_restart())
-
+        self.id = me.id
+        self.name = me.first_name
+        self.mention = me.mention
+        self.username = me.username
+        self.log_channel = LOG_CHANNEL
+        self.uptime = UPTIME
+        curr = datetime.datetime.now(pytz.timezone("Asia/Kolkata"))
+        date = curr.strftime('%d %B, %Y')
+        tame = curr.strftime('%I:%M:%S %p')
+        logging.info(LOG_MSG.format(me.first_name, date, tame, __repo__, __version__, __license__, __copyright__))
+        
+        try: await self.send_message(LOG_CHANNEL, text=LOG_MSG.format(me.first_name, date, tame, __repo__, __version__, __license__, __copyright__), disable_web_page_preview=True)   
+        except Exception as e: logging.warning(f"Bot Isn't Able To Send Message To LOG_CHANNEL \n{e}")
+        
+        if bool(WEB_SUPPORT) is True:
+            app = web.AppRunner(web.Application(client_max_size=30000000))
+            await app.setup()
+            await web.TCPSite(app, "0.0.0.0", 8080).start()
+            logging.info("Web Response Is Running......🕸️")
+            
     async def stop(self, *args):
         await super().stop()
-        logging.info("Bot stopped. Bye.")
+        logging.info(f"Bot Is Restarting ⟳...")
 
-    async def restart(self):
-        logging.info("Restarting bot process...")
-        await self.stop()
-        os.execl(sys.executable, sys.executable, *sys.argv)
-
-    async def schedule_restart(self, hours: int = 24):
-        await asyncio.sleep(hours * 60 * 60)  # Wait for 24 hours
-        await self.send_message(chat_id=LOG_CHANNEL, text="Auto Restarting the KuttuBot \n(24 hrs ⏰️ refresh)...")
-        await self.restart()
-
-    async def iter_messages(
-        self,
-        chat_id: Union[int, str],
-        limit: int,
-        offset: int = 0,
-    ) -> Optional[AsyncGenerator["types.Message", None]]:
+    async def iter_messages(self, chat_id: Union[int, str], limit: int, offset: int = 0) -> Optional[AsyncGenerator["types.Message", None]]:                       
         current = offset
         while True:
             new_diff = min(200, limit - current)
             if new_diff <= 0:
                 return
-            messages = await self.get_messages(chat_id, list(range(current, current + new_diff + 1)))
+            messages = await self.get_messages(chat_id, list(range(current, current+new_diff+1)))
             for message in messages:
                 yield message
                 current += 1
 
 
-app = Bot()
-app.run()
+        
+Bot().run()
