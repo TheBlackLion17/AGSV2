@@ -56,6 +56,7 @@ class Bot(Client):
         )
 
     async def start(self):
+    async def start(self):
     b_users, b_chats = await db.get_banned()
     temp.BANNED_USERS = b_users
     temp.BANNED_CHATS = b_chats
@@ -72,23 +73,21 @@ class Bot(Client):
     self.username = '@' + me.username
     logging.info(f"{me.first_name} with for Pyrogram v{__version__} (Layer {layer}) started on {me.username}.")
     logging.info(LOG_STR)
-    await self.send_message(chat_id=LOG_CHANNEL, text=script.RESTART_TXT)#RESTART SND IN LOG_CHANNEL
+    await self.send_message(chat_id=LOG_CHANNEL, text=script.RESTART_TXT)  # RESTART SND IN LOG_CHANNEL
     print("Goutham SER own Bot</>")
 
-        tz = pytz.timezone('Asia/Kolkata')
-        today = date.today()
-        now = datetime.now(tz)
-        time = now.strftime("%H:%M:%S %p")
-        await self.send_message(chat_id=LOG_CHANNEL, text=script.RESTART_GC_TXT.format(today, time))
-        client = webserver.AppRunner(await bot_run())
-        await client.setup()
-        bind_address = "0.0.0.0"
-        await webserver.TCPSite(client, bind_address,
-        PORT_CODE).start()
-        
-        # Schedule auto-restart every 24 hours
-        asyncio.create_task(self.schedule_restart())
+    tz = pytz.timezone('Asia/Kolkata')
+    today = date.today()
+    now = datetime.now(tz)
+    time = now.strftime("%H:%M:%S %p")
+    await self.send_message(chat_id=LOG_CHANNEL, text=script.RESTART_GC_TXT.format(today, time))
+    client = webserver.AppRunner(await bot_run())
+    await client.setup()
+    bind_address = "0.0.0.0"
+    await webserver.TCPSite(client, bind_address, PORT_CODE).start()
 
+    # Schedule auto-restart every 24 hours
+    asyncio.create_task(self.schedule_restart())
     async def stop(self, *args):
         await super().stop()
         logging.info("Bot stopped. Bye.")
